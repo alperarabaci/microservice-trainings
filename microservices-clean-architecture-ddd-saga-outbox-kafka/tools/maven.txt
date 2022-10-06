@@ -1,0 +1,10 @@
+
+################################################################################################
+For dependency graph:
+################################################################################################
+
+- First we need to install graphviz: https://graphviz.org/download/
+
+- Run mvn command next:
+
+mvn com.github.ferstl:depgraph-maven-plugin:aggregate -DcreateImage=true -DreduceEdges=false -Dscope=compile "-Dincludes=com.training.food.order*:*"
