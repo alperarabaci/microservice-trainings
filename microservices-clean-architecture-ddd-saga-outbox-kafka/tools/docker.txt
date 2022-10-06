@@ -1,0 +1,1 @@
+docker run -itd -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=pass -p 5432:5432 -v /data:/var/lib/postgresql/data --name postgresql postgres:14.5
