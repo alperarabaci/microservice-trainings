@@ -1,18 +1,17 @@
 package com.training.food.ordering.order.service.domain.entity;
 
 import com.training.food.order.domain.entity.BaseEntity;
-import com.training.food.order.domain.valueobject.BaseId;
 import com.training.food.order.domain.valueobject.Money;
 import com.training.food.order.domain.valueobject.OrderId;
 import com.training.food.ordering.order.service.domain.valueobject.OrderItemId;
 
-import java.util.UUID;
-
 public class OrderItem extends BaseEntity<OrderItemId> {
 
     private OrderId orderId;
+
+
     private final Product product;
-    private final Integer quantity;
+    private final int quantity;
     private final Money price;
     private final Money subTotal;
 
@@ -23,6 +22,17 @@ public class OrderItem extends BaseEntity<OrderItemId> {
         quantity = builder.quantity;
         price = builder.price;
         subTotal = builder.subTotal;
+    }
+
+    void initiliazeOrderItem(OrderId orderId, OrderItemId orderItemId){
+        this.orderId = orderId;
+        super.setId(orderItemId);
+    }
+
+    boolean isPriceValid() {
+        return price.isGreaterThanZero()
+                && price.equals(product.getPrice())
+                && price.multiply(quantity).equals(subTotal);
     }
 
     public static Builder builder() {
@@ -77,5 +87,25 @@ public class OrderItem extends BaseEntity<OrderItemId> {
         public OrderItem build() {
             return new OrderItem(this);
         }
+    }
+
+    public OrderId getOrderId() {
+        return orderId;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public Money getPrice() {
+        return price;
+    }
+
+    public Money getSubTotal() {
+        return subTotal;
     }
 }

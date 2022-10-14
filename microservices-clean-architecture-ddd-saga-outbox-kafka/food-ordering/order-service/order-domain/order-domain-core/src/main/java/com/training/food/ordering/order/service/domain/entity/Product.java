@@ -4,8 +4,6 @@ import com.training.food.order.domain.entity.BaseEntity;
 import com.training.food.order.domain.valueobject.Money;
 import com.training.food.order.domain.valueobject.ProductId;
 
-import java.util.UUID;
-
 public class Product extends BaseEntity<ProductId> {
 
     private final String name;
