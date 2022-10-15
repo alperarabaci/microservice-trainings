@@ -47,4 +47,12 @@ public class Restaurant extends AggregateRoot<RestaurantId> {
             return new Restaurant(this);
         }
     }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
 }
