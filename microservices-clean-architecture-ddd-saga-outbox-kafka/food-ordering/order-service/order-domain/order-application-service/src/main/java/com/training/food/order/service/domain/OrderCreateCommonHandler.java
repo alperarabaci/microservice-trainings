@@ -24,7 +24,7 @@ public class OrderCreateCommonHandler {
         OrderCreateEvent event = orderCreateHelper.persistOrder(createOrderCommand);
         log.info("Order is created with id: {},", event.getOrder().getId().getValue());
         publisher.publish(event);
-        return orderDataMapper.orderToCreateOrderResponse(event.getOrder(), null);
+        return orderDataMapper.orderToCreateOrderResponse(event.getOrder(), "Order created successfully.");
     }
 
 }
