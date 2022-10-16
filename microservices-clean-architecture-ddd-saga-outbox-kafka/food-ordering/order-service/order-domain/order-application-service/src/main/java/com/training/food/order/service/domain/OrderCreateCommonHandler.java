@@ -10,7 +10,7 @@ import com.training.food.ordering.order.service.domain.OrderDomainService;
 import com.training.food.ordering.order.service.domain.entity.Customer;
 import com.training.food.ordering.order.service.domain.entity.Order;
 import com.training.food.ordering.order.service.domain.entity.Restaurant;
-import com.training.food.ordering.order.service.domain.event.OrderCreateEvent;
+import com.training.food.ordering.order.service.domain.event.OrderCreatedEvent;
 import com.training.food.ordering.order.service.domain.exception.OrderDomainException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,14 +31,17 @@ public class OrderCreateCommonHandler {
     private final RestaurantRepository restaurantRepository;
     private final OrderDataMapper orderDataMapper;
 
+    private final ApplicationDomainEventPublisher publisher;
+
     @Transactional
     public CreateOrderResponse createOrder(CreateOrderCommand createOrderCommand) {
         checkCustomer(createOrderCommand.getCustomerId());
         Restaurant restaurant = checkRestaurant(createOrderCommand);
         Order order = orderDataMapper.createOrderCommandToOrder(createOrderCommand);
-        OrderCreateEvent event = orderDomainService.validateAndInitiateOrder(order, restaurant);
+        OrderCreatedEvent event = orderDomainService.validateAndInitiateOrder(order, restaurant);
         Order orderResult = saveOrder(order);
         log.info("Order is created with id: {}", orderResult.getId().getValue());
+        publisher.publish(event);
         return orderDataMapper.orderToCreateOrderResponse(orderResult, null);
     }
 

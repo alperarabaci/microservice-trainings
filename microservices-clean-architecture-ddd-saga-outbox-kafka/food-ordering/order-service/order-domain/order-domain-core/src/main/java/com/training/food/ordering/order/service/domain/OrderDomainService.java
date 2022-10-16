@@ -3,14 +3,14 @@ package com.training.food.ordering.order.service.domain;
 import com.training.food.ordering.order.service.domain.entity.Order;
 import com.training.food.ordering.order.service.domain.entity.Restaurant;
 import com.training.food.ordering.order.service.domain.event.OrderCancelledEvent;
-import com.training.food.ordering.order.service.domain.event.OrderCreateEvent;
+import com.training.food.ordering.order.service.domain.event.OrderCreatedEvent;
 import com.training.food.ordering.order.service.domain.event.OrderPaidEvent;
 
 import java.util.List;
 
 public interface OrderDomainService {
 
-    OrderCreateEvent validateAndInitiateOrder(Order order, Restaurant restaurant);
+    OrderCreatedEvent validateAndInitiateOrder(Order order, Restaurant restaurant);
 
     OrderPaidEvent payOrder(Order order);
 
