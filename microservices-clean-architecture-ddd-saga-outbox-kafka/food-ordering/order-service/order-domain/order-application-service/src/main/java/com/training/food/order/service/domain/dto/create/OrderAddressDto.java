@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Builder
 @AllArgsConstructor
-public class OrderAddress {
+public class OrderAddressDto {
     @Max(value=50)
     @NotNull
     private final String street;

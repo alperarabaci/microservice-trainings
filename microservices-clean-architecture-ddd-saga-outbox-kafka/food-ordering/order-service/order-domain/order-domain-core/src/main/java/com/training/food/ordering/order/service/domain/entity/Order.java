@@ -5,7 +5,7 @@ import com.training.food.order.domain.valueobject.*;
 import com.training.food.ordering.order.service.domain.exception.OrderDomainException;
 import com.training.food.ordering.order.service.domain.valueobject.OrderItemId;
 import com.training.food.ordering.order.service.domain.valueobject.StreetAddress;
-import com.training.food.ordering.order.service.domain.valueobject.TracingId;
+import com.training.food.ordering.order.service.domain.valueobject.TrackingId;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,9 +18,9 @@ public class Order extends AggregateRoot<OrderId> {
     private final Money price;
     private final List<OrderItem> items;
 
-    private TracingId tracingId;
+    private TrackingId trackingId;
     private OrderStatus orderStatus;
-    private List<String> failureMessage;
+    private List<String> failureMessages;
 
     public void validateOrder() {
         validateInitialOrder();
@@ -60,7 +60,7 @@ public class Order extends AggregateRoot<OrderId> {
     }
     public void initializeOrder() {
         setId(new OrderId(UUID.randomUUID()));
-        tracingId =  new TracingId(UUID.randomUUID());
+        trackingId =  new TrackingId(UUID.randomUUID());
         orderStatus = OrderStatus.PENDING;
         initializeOrderItems();
     }
@@ -103,11 +103,11 @@ public class Order extends AggregateRoot<OrderId> {
     }
 
     private void updateFailureMessages(List<String> failureMessage) {
-        if(this.failureMessage != null) {
-            this.failureMessage.addAll(filterEmptyMessages(failureMessage));
+        if(this.failureMessages != null) {
+            this.failureMessages.addAll(filterEmptyMessages(failureMessage));
         }
-        if(this.failureMessage == null) {
-            this.failureMessage = filterEmptyMessages(failureMessage);
+        if(this.failureMessages == null) {
+            this.failureMessages = filterEmptyMessages(failureMessage);
         }
     }
 
@@ -119,12 +119,12 @@ public class Order extends AggregateRoot<OrderId> {
         super.setId(builder.orderId);
         customerId = builder.customerId;
         restaurantId = builder.restaurantId;
-        streetAddress = builder.streetAddress;
+        streetAddress = builder.deliveryAddress;
         price = builder.price;
         items = builder.items;
-        tracingId = builder.tracingId;
+        trackingId = builder.trackingId;
         orderStatus = builder.orderStatus;
-        failureMessage = builder.failureMessage;
+        failureMessages = builder.failureMessage;
     }
 
     public CustomerId getCustomerId() {
@@ -147,26 +147,30 @@ public class Order extends AggregateRoot<OrderId> {
         return items;
     }
 
-    public TracingId getTracingId() {
-        return tracingId;
+    public TrackingId getTrackingId() {
+        return trackingId;
     }
 
     public OrderStatus getOrderStatus() {
         return orderStatus;
     }
 
-    public List<String> getFailureMessage() {
-        return failureMessage;
+    public List<String> getFailureMessages() {
+        return failureMessages;
+    }
+
+    public static Builder builder() {
+        return Builder.builder();
     }
 
     public static final class Builder {
         private OrderId orderId;
         private CustomerId customerId;
         private RestaurantId restaurantId;
-        private StreetAddress streetAddress;
+        private StreetAddress deliveryAddress;
         private Money price;
         private List<OrderItem> items;
-        private TracingId tracingId;
+        private TrackingId trackingId;
         private OrderStatus orderStatus;
         private List<String> failureMessage;
 
@@ -192,8 +196,8 @@ public class Order extends AggregateRoot<OrderId> {
             return this;
         }
 
-        public Builder streetAddress(StreetAddress val) {
-            streetAddress = val;
+        public Builder deliveryAddress(StreetAddress val) {
+            deliveryAddress = val;
             return this;
         }
 
@@ -207,8 +211,8 @@ public class Order extends AggregateRoot<OrderId> {
             return this;
         }
 
-        public Builder tracingId(TracingId val) {
-            tracingId = val;
+        public Builder tracingId(TrackingId val) {
+            trackingId = val;
             return this;
         }
 
