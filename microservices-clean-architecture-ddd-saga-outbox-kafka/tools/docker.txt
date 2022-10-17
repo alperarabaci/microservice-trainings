@@ -1,1 +1,12 @@
 docker run -itd -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=pass -p 5432:5432 -v /data:/var/lib/postgresql/data --name postgresql postgres:14.5
+
+# run zk
+docker-compose -f common.yml -f zookeeper.yml up
+# zk check
+echo ruok | nc localhost 2181
+
+# run kafka
+docker-compose -f common.yml -f kafka_cluster.yml up
+
+# kafka init
+docker-compose -f common.yml -f init_kafka.yml up
