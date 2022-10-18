@@ -7,6 +7,7 @@
         <module>order-service</module>
         <module>common</module>
         <module>infrastructure</module>
+        <module>common/common-application</module>
     </modules>
 
     <parent>
@@ -89,6 +90,12 @@
             <dependency>
                 <groupId>com.training.food.order</groupId>
                 <artifactId>kafka-config-data</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.training.food.order</groupId>
+                <artifactId>common-application</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
