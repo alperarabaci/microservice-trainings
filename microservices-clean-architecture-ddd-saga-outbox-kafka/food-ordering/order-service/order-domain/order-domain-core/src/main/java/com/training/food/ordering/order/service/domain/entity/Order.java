@@ -14,13 +14,18 @@ public class Order extends AggregateRoot<OrderId> {
 
     private final CustomerId customerId;
     private final RestaurantId restaurantId;
-    private final StreetAddress streetAddress;
+    private final StreetAddress deliveryAddress;
     private final Money price;
     private final List<OrderItem> items;
 
     private TrackingId trackingId;
     private OrderStatus orderStatus;
     private List<String> failureMessages;
+    /**
+     * No need to use this kind of dirty ugly things..
+     * Save as list, serve as a list?
+     */
+    public static final String FAILURE_MESSAGE_DELIMITER = ",";
 
     public void validateOrder() {
         validateInitialOrder();
@@ -119,7 +124,7 @@ public class Order extends AggregateRoot<OrderId> {
         super.setId(builder.orderId);
         customerId = builder.customerId;
         restaurantId = builder.restaurantId;
-        streetAddress = builder.deliveryAddress;
+        deliveryAddress = builder.deliveryAddress;
         price = builder.price;
         items = builder.items;
         trackingId = builder.trackingId;
@@ -135,8 +140,8 @@ public class Order extends AggregateRoot<OrderId> {
         return restaurantId;
     }
 
-    public StreetAddress getStreetAddress() {
-        return streetAddress;
+    public StreetAddress getDeliveryAddress() {
+        return deliveryAddress;
     }
 
     public Money getPrice() {
@@ -211,7 +216,7 @@ public class Order extends AggregateRoot<OrderId> {
             return this;
         }
 
-        public Builder tracingId(TrackingId val) {
+        public Builder trackingId(TrackingId val) {
             trackingId = val;
             return this;
         }
@@ -221,7 +226,7 @@ public class Order extends AggregateRoot<OrderId> {
             return this;
         }
 
-        public Builder failureMessage(List<String> val) {
+        public Builder failureMessages(List<String> val) {
             failureMessage = val;
             return this;
         }

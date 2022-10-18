@@ -28,6 +28,14 @@
             <groupId>com.training.food.order</groupId>
             <artifactId>common-domain</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.training.food.order</groupId>
+            <artifactId>order-domain-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.training.food.order</groupId>
+            <artifactId>order-application-service</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

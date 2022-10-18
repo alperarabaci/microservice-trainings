@@ -26,12 +26,13 @@ public class OrderEntity {
     private BigDecimal price;
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
-    private String failureMessage;
+    //one part list, other part is string. this kind of usages are wrong!
+    private String failureMessages;
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
-    private OrderAddressEntity orderAddress;
+    private OrderAddressEntity address;
 
-    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItemEntity> items;
 
     @Override
