@@ -16,8 +16,10 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.training.food.order</groupId>
-            <artifactId>order-application-service</artifactId>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <!-- version comes from spring boot parent -->
         </dependency>
     </dependencies>
+
 </project>
