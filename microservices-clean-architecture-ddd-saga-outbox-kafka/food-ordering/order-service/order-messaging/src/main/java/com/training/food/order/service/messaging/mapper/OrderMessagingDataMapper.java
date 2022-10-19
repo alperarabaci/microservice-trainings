@@ -61,4 +61,33 @@ public class OrderMessagingDataMapper {
                     .setRestaurantOrderStatus(RestaurantOrderStatus.PAID)
                     .build() ;
     }
+
+    public PaymentResponse	paymentResponseAvroModelToPaymentResponse(PaymentResponseAvroModel
+                                paymentResponseAvroModel) {
+        return PaymentResponse.builder()
+                .id(paymentResponseAvroModel.getId())
+                .sagaId(paymentResponseAvroModel.getSagaId())
+                .paymentId(paymentResponseAvroModel.getPaymentId())
+                .customerId(paymentResponseAvroModel.getCustomerId())
+                .orderId (paymentResponseAvroModel. getOrderId())
+                .price (paymentResponseAvroModel. getPrice())
+                .createdAt(paymentResponseAvroModel.getCreatedAt())
+                .paymentStatus(com.training.food.order.domain.valueobject.PaymentStatus.valueOf(
+                        paymentResponseAvroModel.getPaymentStatus().name()))
+                .failureMessages(paymentResponseAvroModel.getFailureMessages())
+                . build () ;
+    }
+
+    public RestaurantApprovalResponse approvalResponseAvroModelToApprovalResponse(RestaurantApprovalResponseAvroModel restaurantApprovalResponseAvroModel) {
+        return RestaurantApprovalResponse.builder()
+                .id(restaurantApprovalResponseAvroModel.getId())
+                .sagaId(restaurantApprovalResponseAvroModel.getSagaId())
+                .restaurantId(restaurantApprovalResponseAvroModel.getRestaurantId())
+                .orderId(restaurantApprovalResponseAvroModel.getOrderId())
+                .createdAt(restaurantApprovalResponseAvroModel.getCreatedAt())
+                .orderApprovalStatus(com.training.food.order.domain.valueobject.OrderApprovalStatus.valueOf(
+                        restaurantApprovalResponseAvroModel.getOrderApprovalStatus().name()))
+                .failureMessages(restaurantApprovalResponseAvroModel.getFailureMessages())
+                .build();
+    }
 }

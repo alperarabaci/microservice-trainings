@@ -15,14 +15,7 @@ public class OrderKafkaMessageHelper {
 
         return new ListenableFutureCallback<>() {
             @Override
-            public void onFailure(Throwable ex) {
-                log.error("Error while sending {}" +
-                                "message {} to topic {}", avroModelName, requestAvroModel.toString(),
-                        responseTopicName, ex);
-            }
-
-            @Override
-            public void onSuccess(SendResult<String, PaymentRequestAvroModel> result) {
+            public void onSuccess(SendResult<String, T> result) {
                 RecordMetadata metadata = result.getRecordMetadata();
                 log.info("Received successfull response from Kfka for order id: {}"
                                 + "Topic: {} Partition: {} Offset: {} ",
@@ -31,6 +24,14 @@ public class OrderKafkaMessageHelper {
                         metadata.offset(),
                         metadata.timestamp());
             }
+
+            @Override
+            public void onFailure(Throwable ex) {
+                log.error("Error while sending {}" +
+                                "message {} to topic {}", avroModelName, requestAvroModel.toString(),
+                        responseTopicName, ex);
+            }
+
         };
     }
 
