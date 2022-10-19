@@ -1,6 +1,7 @@
 package com.training.food.order.service.messaging.publisher.kafka;
 
 import com.training.food.order.kafka.order.avro.model.PaymentRequestAvroModel;
+import com.training.food.order.kafka.order.avro.model.RestaurantApprovalRequestAvroModel;
 import com.training.food.order.kafka.producer.service.KafkaProducer;
 import com.training.food.order.service.domain.config.OrderServiceConfigData;
 import com.training.food.order.service.domain.message.publisher.restaurantapproval.OrderPaidRestaurantRequestMessagePublisher;
@@ -15,13 +16,20 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class PayOrderKafkaMessagePublisher implements OrderPaidRestaurantRequestMessagePublisher {
     private final OrderMessagingDataMapper orderMessagingDataMapper;
-    private final KafkaProducer<String, PaymentRequestAvroModel> kafkaProducer;
+    private final KafkaProducer<String, RestaurantApprovalRequestAvroModel> kafkaProducer;
     private final OrderServiceConfigData orderServiceConfigData;
 
     @Override
     public void publish(OrderPaidEvent domainEvent) {
         String orderId = domainEvent.getOrder().getId().getValue().toString();
-        orderMessagingDataMapper.orderPaidEventToRestaurantApprovalRequestAvroModel(domainEvent);
-        
+        RestaurantApprovalRequestAvroModel avroModel = orderMessagingDataMapper.orderPaidEventToRestaurantApprovalRequestAvroModel(domainEvent);
+
+        kafkaProducer.send(orderServiceConfigData.getRestaurantApprovalRequestTopicName(),
+                orderId,
+                paymentRequestAvroModel,
+                kafkaHelper. getKafkaCallback(orderServiceConfigData.getPaymentResponseTopicName(),
+                        avroModel,
+                        )
+        );
     }
 }
