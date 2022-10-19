@@ -6,6 +6,7 @@ import com.training.food.order.service.domain.dto.message.RestaurantApprovalResp
 import com.training.food.ordering.order.service.domain.entity.Order;
 import com.training.food.ordering.order.service.domain.event.OrderCancelledEvent;
 import com.training.food.ordering.order.service.domain.event.OrderCreateEvent;
+import com.training.food.ordering.order.service.domain.event.OrderPaidEvent;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -27,7 +28,7 @@ public class OrderMessagingDataMapper {
                 .build();
     }
 
-    public PaymentRequestAvroModel orderCreatedEventToPaymentRequestAvroModel(OrderCancelledEvent event) {
+    public PaymentRequestAvroModel orderCanceledEventToPaymentRequestAvroModel(OrderCancelledEvent event) {
         Order order = event.getOrder();
         return PaymentRequestAvroModel.newBuilder()
                 .setId(UUID.randomUUID().toString())
@@ -40,4 +41,24 @@ public class OrderMessagingDataMapper {
                 .build();
     }
 
+    public RestaurantApprovalRequestAvroModel orderPaidEventToRestaurantApprovalRequestAvroModel(OrderPaidEvent orderPaidEvent){
+        Order order = orderPaidEvent.getOrder();
+        return RestaurantApprovalRequestAvroModel.newBuilder()
+                .setId(UUID.randomUUID().toString())
+                    .setSagaId("")
+                    .setOrderId(order.getId().getValue().toString())
+                    .setRestaurantId(order.getRestaurantId().getValue().toString())
+                    .setOrderId(order.getId().getValue().toString())
+                    .setRestaurantOrderStatus(com.training.food.order.kafka.order.avro.model.RestaurantOrderStatus
+                                                      .valueOf(order.getOrderStatus().name()))
+                    .setProducts(order.getItems().stream().map(orderItem ->
+                        com.training.food.order.kafka.order.avro.model.Product.newBuilder()
+                                .setId(orderItem. getProduct().getId().getValue().toString())
+                    .setQuantity(orderItem.getQuantity())
+                                .build()).collect(Collectors.toList()))
+                    .setPrice(order.getPrice().getAmount())
+                    .setCreatedAt(orderPaidEvent.getCreatedAt().toInstant())
+                    .setRestaurantOrderStatus(RestaurantOrderStatus.PAID)
+                    .build() ;
+    }
 }
