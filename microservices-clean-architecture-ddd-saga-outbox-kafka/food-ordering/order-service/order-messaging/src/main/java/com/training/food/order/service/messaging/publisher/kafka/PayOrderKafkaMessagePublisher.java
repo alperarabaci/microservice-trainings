@@ -19,17 +19,28 @@ public class PayOrderKafkaMessagePublisher implements OrderPaidRestaurantRequest
     private final KafkaProducer<String, RestaurantApprovalRequestAvroModel> kafkaProducer;
     private final OrderServiceConfigData orderServiceConfigData;
 
+    private final OrderKafkaMessageHelper kafkaHelper;
+
     @Override
     public void publish(OrderPaidEvent domainEvent) {
         String orderId = domainEvent.getOrder().getId().getValue().toString();
-        RestaurantApprovalRequestAvroModel avroModel = orderMessagingDataMapper.orderPaidEventToRestaurantApprovalRequestAvroModel(domainEvent);
+        try {
+            RestaurantApprovalRequestAvroModel avroModel = orderMessagingDataMapper.orderPaidEventToRestaurantApprovalRequestAvroModel(domainEvent);
 
-        kafkaProducer.send(orderServiceConfigData.getRestaurantApprovalRequestTopicName(),
-                orderId,
-                paymentRequestAvroModel,
-                kafkaHelper. getKafkaCallback(orderServiceConfigData.getPaymentResponseTopicName(),
-                        avroModel,
-                        )
-        );
+            kafkaProducer.send(orderServiceConfigData.getRestaurantApprovalRequestTopicName(),
+                    orderId,
+                    avroModel,
+                    kafkaHelper.getKafkaCallback(orderServiceConfigData.getRestaurantApprovalRequestTopicName(),
+                            avroModel,
+                            orderId,
+                            "RestaurantApprovalRequestAvroModel"
+                            )
+            );
+            log.info("RestaurantApprovalRequestAvroModel sent to kafka for order id: {}", orderId);
+        } catch (Exception e) {
+            log.error("Error while sending RestaurantApprovalRequestAvroModel" +
+                            " to kafka with order id: {} and saga id: {}, error: {}",
+                    orderId, e.getMessage());
+        }
     }
 }

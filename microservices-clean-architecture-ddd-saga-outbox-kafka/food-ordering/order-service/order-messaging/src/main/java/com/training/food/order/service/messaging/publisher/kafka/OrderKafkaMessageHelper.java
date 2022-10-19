@@ -11,14 +11,14 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 @Component
 public class OrderKafkaMessageHelper {
 
-    public ListenableFutureCallback<SendResult<String, PaymentRequestAvroModel>> getKafkaCallback(String paymentResponseTopicName, PaymentRequestAvroModel paymentRequestAvroModel) {
+    public <T> ListenableFutureCallback<SendResult<String, T>> getKafkaCallback(String responseTopicName, T requestAvroModel, String orderId, String avroModelName) {
 
         return new ListenableFutureCallback<>() {
             @Override
             public void onFailure(Throwable ex) {
-                log.error("Error while sending paymentRequestAvroModel" +
-                                "message {} to topic {}", paymentRequestAvroModel.toString(),
-                        paymentResponseTopicName, ex);
+                log.error("Error while sending {}" +
+                                "message {} to topic {}", avroModelName, requestAvroModel.toString(),
+                        responseTopicName, ex);
             }
 
             @Override
@@ -26,7 +26,7 @@ public class OrderKafkaMessageHelper {
                 RecordMetadata metadata = result.getRecordMetadata();
                 log.info("Received successfull response from Kfka for order id: {}"
                                 + "Topic: {} Partition: {} Offset: {} ",
-                        paymentRequestAvroModel.getOrderId(),
+                        orderId,
                         metadata.topic(),
                         metadata.offset(),
                         metadata.timestamp());
