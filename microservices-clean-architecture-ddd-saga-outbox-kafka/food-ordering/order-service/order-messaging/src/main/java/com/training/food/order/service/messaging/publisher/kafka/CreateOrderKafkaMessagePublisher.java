@@ -22,6 +22,7 @@ public class CreateOrderKafkaMessagePublisher implements OrderCreatedPaymentRequ
     private final KafkaProducer<String, PaymentRequestAvroModel> kafkaProducer;
     private final OrderServiceConfigData orderServiceConfigData;
 
+
     private final OrderKafkaMessageHelper kafkaHelper;
 
     @Override

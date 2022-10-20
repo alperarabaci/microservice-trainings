@@ -1,4 +1,14 @@
-docker run -itd -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=pass -p 5432:5432 -v /data:/var/lib/postgresql/data --name postgresql postgres:14.5
+#create directory for postregsql volume
+mkdir ${HOME}/dev/docker/data/
+
+docker run -d \
+	--name dev-postgres \
+	-e POSTGRES_USER=admin \
+	-e POSTGRES_PASSWORD=pass \
+	-v ${HOME}/dev/docker/data/:/var/lib/postgresql/data \
+    -p 5432:5432 \
+    --name postgresql \
+    postgres:14.5
 
 # run zk
 docker-compose -f common.yml -f zookeeper.yml up

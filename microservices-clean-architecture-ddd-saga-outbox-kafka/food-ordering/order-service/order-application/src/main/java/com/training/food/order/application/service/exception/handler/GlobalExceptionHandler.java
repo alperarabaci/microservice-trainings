@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
         log.error(exception.getMessage(), exception);
         return ErrorDto.builder()
                 .code(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase())
-                .message("Unexpected error!")
+                .message("Unexpected error! " + exception.getMessage())
                 .build();
     }
 

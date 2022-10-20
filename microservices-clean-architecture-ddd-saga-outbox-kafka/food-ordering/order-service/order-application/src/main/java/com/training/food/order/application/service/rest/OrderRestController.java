@@ -5,7 +5,6 @@ import com.training.food.order.service.domain.dto.create.CreateOrderResponse;
 import com.training.food.order.service.domain.dto.track.TrackOrderQuery;
 import com.training.food.order.service.domain.dto.track.TrackOrderResponse;
 import com.training.food.order.service.domain.ports.input.service.OrderApplicationService;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +14,14 @@ import java.util.UUID;
 @Slf4j
 @RestController
 @RequestMapping(value = "/orders", produces = "application/nvd.api.v1+json")
-@AllArgsConstructor
+//@AllArgsConstructor
 public class OrderRestController {
 
     private final OrderApplicationService orderApplicationService;
+
+    public OrderRestController(OrderApplicationService orderApplicationService) {
+        this.orderApplicationService = orderApplicationService;
+    }
 
     @PostMapping
     public ResponseEntity<CreateOrderResponse> createOrder(@RequestBody CreateOrderCommand createOrderCommand) {
