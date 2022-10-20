@@ -6,13 +6,9 @@ import com.training.food.order.service.domain.config.OrderServiceConfigData;
 import com.training.food.order.service.domain.message.publisher.payment.OrderCancelledPaymentRequestMessagePublisher;
 import com.training.food.order.service.messaging.mapper.OrderMessagingDataMapper;
 import com.training.food.ordering.order.service.domain.event.OrderCancelledEvent;
-import com.training.food.ordering.order.service.domain.event.OrderCreateEvent;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.producer.RecordMetadata;
-import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
-import org.springframework.util.concurrent.ListenableFutureCallback;
 
 @Slf4j
 @Component

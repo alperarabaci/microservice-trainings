@@ -2,7 +2,6 @@ package com.training.food.order.service.dataaccess.order.entity;
 
 import lombok.*;
 
-import javax.persistence.IdClass;
 import java.io.Serializable;
 import java.util.Objects;
 

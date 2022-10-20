@@ -1,6 +1,5 @@
 package com.training.food.order.service.messaging.publisher.kafka;
 
-import com.training.food.order.kafka.order.avro.model.PaymentRequestAvroModel;
 import com.training.food.order.kafka.order.avro.model.RestaurantApprovalRequestAvroModel;
 import com.training.food.order.kafka.producer.service.KafkaProducer;
 import com.training.food.order.service.domain.config.OrderServiceConfigData;

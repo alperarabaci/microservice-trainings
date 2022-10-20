@@ -10,7 +10,10 @@ import com.training.food.order.service.domain.ports.input.service.OrderApplicati
 import com.training.food.order.service.domain.ports.output.repository.CustomerRepository;
 import com.training.food.order.service.domain.ports.output.repository.OrderRepository;
 import com.training.food.order.service.domain.ports.output.repository.RestaurantRepository;
-import com.training.food.ordering.order.service.domain.entity.*;
+import com.training.food.ordering.order.service.domain.entity.Customer;
+import com.training.food.ordering.order.service.domain.entity.Order;
+import com.training.food.ordering.order.service.domain.entity.Product;
+import com.training.food.ordering.order.service.domain.entity.Restaurant;
 import com.training.food.ordering.order.service.domain.exception.OrderDomainException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
