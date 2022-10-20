@@ -63,6 +63,10 @@ public class Payment extends AggregateRoot<PaymentId> {
         return createdAt;
     }
 
+    public void updateStatus(PaymentStatus paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
     public static final class Builder {
         private PaymentId id;
         private OrderId orderId;
