@@ -1,8 +1,6 @@
 package com.training.food.order.application.service.exception.handler;
 
 import com.training.food.order.service.application.exception.handler.ErrorDto;
-import com.training.food.ordering.order.service.domain.exception.OrderDomainException;
-import com.training.food.ordering.order.service.domain.exception.OrderNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
-import javax.validation.Validation;
 import javax.validation.ValidationException;
 import java.util.stream.Collectors;
 
