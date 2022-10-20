@@ -3,14 +3,14 @@ package com.training.food.ordering.payment.service.domain.entity;
 import com.training.food.order.domain.entity.BaseEntity;
 import com.training.food.order.domain.valueobject.CustomerId;
 import com.training.food.order.domain.valueobject.Money;
-import com.training.food.ordering.payment.service.domain.valueobject.CreditEntityId;
+import com.training.food.ordering.payment.service.domain.valueobject.CreditEntryId;
 
-public class CreditEntity extends BaseEntity<CreditEntityId> {
+public class CreditEntry extends BaseEntity<CreditEntryId> {
 
     private final CustomerId customerId;
     private Money totalCreditAmount;
 
-    private CreditEntity(Builder builder) {
+    private CreditEntry(Builder builder) {
         setId(builder.id);
         customerId = builder.customerId;
         totalCreditAmount = builder.totalCreditAmount;
@@ -34,7 +34,7 @@ public class CreditEntity extends BaseEntity<CreditEntityId> {
 
 
     public static final class Builder {
-        private CreditEntityId id;
+        private CreditEntryId id;
         private CustomerId customerId;
         private Money totalCreditAmount;
 
@@ -45,7 +45,7 @@ public class CreditEntity extends BaseEntity<CreditEntityId> {
             return new Builder();
         }
 
-        public Builder id(CreditEntityId val) {
+        public Builder id(CreditEntryId val) {
             id = val;
             return this;
         }
@@ -60,8 +60,8 @@ public class CreditEntity extends BaseEntity<CreditEntityId> {
             return this;
         }
 
-        public CreditEntity build() {
-            return new CreditEntity(this);
+        public CreditEntry build() {
+            return new CreditEntry(this);
         }
     }
 }

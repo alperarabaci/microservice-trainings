@@ -4,9 +4,9 @@ import com.training.food.order.domain.valueobject.BaseId;
 
 import java.util.UUID;
 
-public class CreditEntityId extends BaseId<UUID> {
+public class CreditEntryId extends BaseId<UUID> {
 
-    public CreditEntityId(UUID value) {
+    public CreditEntryId(UUID value) {
         super(value);
     }
 }
