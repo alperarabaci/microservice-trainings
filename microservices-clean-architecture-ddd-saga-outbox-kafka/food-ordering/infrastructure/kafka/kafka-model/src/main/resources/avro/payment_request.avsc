@@ -1,5 +1,5 @@
 {
-    "namespace": "com.training.food.order.kafka.order.avro.model",
+    "namespace": "com.training.food.ordering.kafka.order.avro.model",
     "type": "record",
     "name": "PaymentRequestAvroModel",
     "fields": [

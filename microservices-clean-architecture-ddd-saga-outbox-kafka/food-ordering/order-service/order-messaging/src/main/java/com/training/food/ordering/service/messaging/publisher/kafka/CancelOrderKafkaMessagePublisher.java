@@ -1,6 +1,7 @@
 package com.training.food.ordering.service.messaging.publisher.kafka;
 
 import com.training.food.ordering.kafka.order.avro.model.PaymentRequestAvroModel;
+import com.training.food.ordering.kafka.producer.KafkaMessageHelper;
 import com.training.food.ordering.kafka.producer.service.KafkaProducer;
 import com.training.food.ordering.order.service.domain.event.OrderCancelledEvent;
 import com.training.food.ordering.service.domain.config.OrderServiceConfigData;
@@ -18,7 +19,7 @@ public class CancelOrderKafkaMessagePublisher implements OrderCancelledPaymentRe
     private final KafkaProducer<String, PaymentRequestAvroModel> kafkaProducer;
     private final OrderServiceConfigData orderServiceConfigData;
 
-    private final OrderKafkaMessageHelper kafkaHelper;
+    private final KafkaMessageHelper kafkaHelper;
 
     @Override
     public void publish(OrderCancelledEvent domainEvent) {

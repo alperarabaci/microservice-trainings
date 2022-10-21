@@ -1,6 +1,7 @@
 package com.training.food.ordering.service.messaging.publisher.kafka;
 
 import com.training.food.ordering.kafka.order.avro.model.PaymentRequestAvroModel;
+import com.training.food.ordering.kafka.producer.KafkaMessageHelper;
 import com.training.food.ordering.kafka.producer.service.KafkaProducer;
 import com.training.food.ordering.order.service.domain.event.OrderCreatedEvent;
 import com.training.food.ordering.service.domain.config.OrderServiceConfigData;
@@ -20,7 +21,7 @@ public class CreateOrderKafkaMessagePublisher implements OrderCreatedPaymentRequ
     private final OrderServiceConfigData orderServiceConfigData;
 
 
-    private final OrderKafkaMessageHelper kafkaHelper;
+    private final KafkaMessageHelper kafkaHelper;
 
     @Override
     public void publish(OrderCreatedEvent domainEvent) {
