@@ -1,7 +1,7 @@
 package com.training.food.ordering.order.service.domain.entity;
 
-import com.training.food.order.domain.entity.AggregateRoot;
-import com.training.food.order.domain.valueobject.*;
+import com.training.food.ordering.domain.entity.AggregateRoot;
+import com.training.food.ordering.domain.valueobject.*;
 import com.training.food.ordering.order.service.domain.exception.OrderDomainException;
 import com.training.food.ordering.order.service.domain.valueobject.OrderItemId;
 import com.training.food.ordering.order.service.domain.valueobject.StreetAddress;

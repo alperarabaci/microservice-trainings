@@ -1,8 +1,8 @@
 package com.training.food.ordering.order.service.domain.entity;
 
-import com.training.food.order.domain.entity.BaseEntity;
-import com.training.food.order.domain.valueobject.Money;
-import com.training.food.order.domain.valueobject.ProductId;
+import com.training.food.ordering.domain.entity.BaseEntity;
+import com.training.food.ordering.domain.valueobject.Money;
+import com.training.food.ordering.domain.valueobject.ProductId;
 
 public class Product extends BaseEntity<ProductId> {
 

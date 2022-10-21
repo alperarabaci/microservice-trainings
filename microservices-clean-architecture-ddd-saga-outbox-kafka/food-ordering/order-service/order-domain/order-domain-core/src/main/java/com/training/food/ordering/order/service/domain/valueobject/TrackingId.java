@@ -1,6 +1,6 @@
 package com.training.food.ordering.order.service.domain.valueobject;
 
-import com.training.food.order.domain.valueobject.BaseId;
+import com.training.food.ordering.domain.valueobject.BaseId;
 
 import java.util.UUID;
 

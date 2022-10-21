@@ -1,10 +1,10 @@
 package com.training.food.ordering.payment.service.domain.entity;
 
-import com.training.food.order.domain.entity.AggregateRoot;
-import com.training.food.order.domain.valueobject.CustomerId;
-import com.training.food.order.domain.valueobject.Money;
-import com.training.food.order.domain.valueobject.OrderId;
-import com.training.food.order.domain.valueobject.PaymentStatus;
+import com.training.food.ordering.domain.entity.AggregateRoot;
+import com.training.food.ordering.domain.valueobject.CustomerId;
+import com.training.food.ordering.domain.valueobject.Money;
+import com.training.food.ordering.domain.valueobject.OrderId;
+import com.training.food.ordering.domain.valueobject.PaymentStatus;
 import com.training.food.ordering.payment.service.domain.valueobject.PaymentId;
 
 import java.time.ZoneId;
@@ -28,6 +28,10 @@ public class Payment extends AggregateRoot<PaymentId> {
         price = builder.price;
         paymentStatus = builder.paymentStatus;
         createdAt = builder.createdAt;
+    }
+
+    public static Builder builder() {
+        return new Builder();
     }
 
     public void initialize() {

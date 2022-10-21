@@ -1,7 +1,7 @@
 package com.training.food.ordering.payment.service.domain;
 
-import com.training.food.order.domain.valueobject.Money;
-import com.training.food.order.domain.valueobject.PaymentStatus;
+import com.training.food.ordering.domain.valueobject.Money;
+import com.training.food.ordering.domain.valueobject.PaymentStatus;
 import com.training.food.ordering.payment.service.domain.entity.CreditEntry;
 import com.training.food.ordering.payment.service.domain.entity.CreditHistory;
 import com.training.food.ordering.payment.service.domain.entity.CreditHistoryId;
