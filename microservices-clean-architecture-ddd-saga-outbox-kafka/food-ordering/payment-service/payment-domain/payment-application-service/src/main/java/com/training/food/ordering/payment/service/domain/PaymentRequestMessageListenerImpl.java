@@ -19,10 +19,15 @@ import org.springframework.stereotype.Service;
 public class PaymentRequestMessageListenerImpl implements PaymentRequestMessageListener {
 
     private final PaymentRequestHelper paymentRequestHelper;
+
+    /**
+     * Refactoring: Replaced with => event.fire();
+     */
+    /*
     private final PaymentCompletedMessagePublisher completedMessagePublisher;
     private final PaymentCanceledMessagePublisher canceledMessagePublisher;
     private final PaymentFailedMessagePublisher failedMessagePublisher;
-
+    */
 
     @Override
     public void completePayment(PaymentRequest paymentRequest) {
@@ -40,14 +45,21 @@ public class PaymentRequestMessageListenerImpl implements PaymentRequestMessageL
         log.info("Publishing payment event with payment id: {} and order id: {}",
                 event.getPayment().getId(),
                 event.getPayment().getOrderId().getValue());
-        //TODO need refactoring
+
+        event.fire();
+
+        /**
+         * Refactoring: Replaced with => event.fire();
+         */
+        /*
         if (event instanceof PaymentCompletedEvent) {
             completedMessagePublisher.publish((PaymentCompletedEvent) event);
         } else if (event instanceof PaymentFailedEvent) {
-            failedMessagePublisher.publish((PaymentCompletedEvent) event);
+            failedMessagePublisher.publish((PaymentFailedEvent)) event);
         } else if (event instanceof PaymentCanceledEvent) {
             canceledMessagePublisher.publish((PaymentCompletedEvent) event);
         }
+        */
     }
 
 

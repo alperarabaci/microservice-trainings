@@ -1,15 +1,14 @@
 package com.training.food.ordering.service.messaging.mapper;
 
-import com.training.food.order.kafka.order.avro.model.*;
 import com.training.food.ordering.domain.valueobject.OrderApprovalStatus;
 import com.training.food.ordering.domain.valueobject.PaymentStatus;
 import com.training.food.ordering.kafka.order.avro.model.*;
-import com.training.food.ordering.service.domain.dto.message.PaymentResponse;
-import com.training.food.ordering.service.domain.dto.message.RestaurantApprovalResponse;
 import com.training.food.ordering.order.service.domain.entity.Order;
 import com.training.food.ordering.order.service.domain.event.OrderCancelledEvent;
-import com.training.food.ordering.order.service.domain.event.OrderCreateEvent;
+import com.training.food.ordering.order.service.domain.event.OrderCreatedEvent;
 import com.training.food.ordering.order.service.domain.event.OrderPaidEvent;
+import com.training.food.ordering.service.domain.dto.message.PaymentResponse;
+import com.training.food.ordering.service.domain.dto.message.RestaurantApprovalResponse;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -18,7 +17,7 @@ import java.util.stream.Collectors;
 @Component
 public class OrderMessagingDataMapper {
 
-    public PaymentRequestAvroModel orderCreatedEventToPaymentRequestAvroModel(OrderCreateEvent event) {
+    public PaymentRequestAvroModel orderCreatedEventToPaymentRequestAvroModel(OrderCreatedEvent event) {
         Order order = event.getOrder();
         return PaymentRequestAvroModel.newBuilder()
                 .setId(UUID.randomUUID().toString())

@@ -1,11 +1,11 @@
 package com.training.food.ordering.service.domain;
 
+import com.training.food.ordering.order.service.domain.OrderDomainService;
+import com.training.food.ordering.order.service.domain.OrderDomainServiceImpl;
 import com.training.food.ordering.service.domain.message.publisher.payment.OrderCreatedPaymentRequestMessagePublisher;
 import com.training.food.ordering.service.domain.ports.output.repository.CustomerRepository;
 import com.training.food.ordering.service.domain.ports.output.repository.OrderRepository;
 import com.training.food.ordering.service.domain.ports.output.repository.RestaurantRepository;
-import com.training.food.ordering.order.service.domain.OrderDomainService;
-import com.training.food.ordering.order.service.domain.OrderDomainServiceImpl;
 import org.mockito.Mockito;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;

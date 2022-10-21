@@ -1,9 +1,5 @@
 package com.training.food.ordering.service.dataaccess.order.mapper;
 
-import com.training.food.order.domain.valueobject.*;
-import com.training.food.ordering.service.dataaccess.order.entity.OrderAddressEntity;
-import com.training.food.ordering.service.dataaccess.order.entity.OrderEntity;
-import com.training.food.ordering.service.dataaccess.order.entity.OrderItemEntity;
 import com.training.food.ordering.domain.valueobject.*;
 import com.training.food.ordering.order.service.domain.entity.Order;
 import com.training.food.ordering.order.service.domain.entity.OrderItem;
@@ -11,6 +7,9 @@ import com.training.food.ordering.order.service.domain.entity.Product;
 import com.training.food.ordering.order.service.domain.valueobject.OrderItemId;
 import com.training.food.ordering.order.service.domain.valueobject.StreetAddress;
 import com.training.food.ordering.order.service.domain.valueobject.TrackingId;
+import com.training.food.ordering.service.dataaccess.order.entity.OrderAddressEntity;
+import com.training.food.ordering.service.dataaccess.order.entity.OrderEntity;
+import com.training.food.ordering.service.dataaccess.order.entity.OrderItemEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

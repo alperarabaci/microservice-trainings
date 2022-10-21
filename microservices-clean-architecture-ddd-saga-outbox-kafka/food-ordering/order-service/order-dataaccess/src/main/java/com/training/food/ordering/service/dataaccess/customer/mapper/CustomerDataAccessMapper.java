@@ -2,8 +2,8 @@ package com.training.food.ordering.service.dataaccess.customer.mapper;
 
 
 import com.training.food.ordering.domain.valueobject.CustomerId;
-import com.training.food.ordering.service.dataaccess.customer.entity.CustomerEntity;
 import com.training.food.ordering.order.service.domain.entity.Customer;
+import com.training.food.ordering.service.dataaccess.customer.entity.CustomerEntity;
 import org.springframework.stereotype.Component;
 
 @Component

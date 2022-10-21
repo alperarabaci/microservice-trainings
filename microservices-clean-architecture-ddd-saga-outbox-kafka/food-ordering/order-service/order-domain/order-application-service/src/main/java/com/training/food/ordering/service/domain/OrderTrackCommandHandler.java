@@ -1,12 +1,12 @@
 package com.training.food.ordering.service.domain;
 
+import com.training.food.ordering.order.service.domain.entity.Order;
+import com.training.food.ordering.order.service.domain.exception.OrderNotFoundException;
+import com.training.food.ordering.order.service.domain.valueobject.TrackingId;
 import com.training.food.ordering.service.domain.dto.track.TrackOrderQuery;
 import com.training.food.ordering.service.domain.dto.track.TrackOrderResponse;
 import com.training.food.ordering.service.domain.mapper.OrderDataMapper;
 import com.training.food.ordering.service.domain.ports.output.repository.OrderRepository;
-import com.training.food.ordering.order.service.domain.entity.Order;
-import com.training.food.ordering.order.service.domain.exception.OrderNotFoundException;
-import com.training.food.ordering.order.service.domain.valueobject.TrackingId;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

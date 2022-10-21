@@ -1,16 +1,17 @@
 package com.training.food.ordering.service.domain;
 
-import com.training.food.ordering.service.domain.dto.create.CreateOrderCommand;
-import com.training.food.ordering.service.domain.mapper.OrderDataMapper;
-import com.training.food.ordering.service.domain.ports.output.repository.CustomerRepository;
-import com.training.food.ordering.service.domain.ports.output.repository.OrderRepository;
-import com.training.food.ordering.service.domain.ports.output.repository.RestaurantRepository;
 import com.training.food.ordering.order.service.domain.OrderDomainService;
 import com.training.food.ordering.order.service.domain.entity.Customer;
 import com.training.food.ordering.order.service.domain.entity.Order;
 import com.training.food.ordering.order.service.domain.entity.Restaurant;
-import com.training.food.ordering.order.service.domain.event.OrderCreateEvent;
+import com.training.food.ordering.order.service.domain.event.OrderCreatedEvent;
 import com.training.food.ordering.order.service.domain.exception.OrderDomainException;
+import com.training.food.ordering.service.domain.dto.create.CreateOrderCommand;
+import com.training.food.ordering.service.domain.mapper.OrderDataMapper;
+import com.training.food.ordering.service.domain.message.publisher.payment.OrderCreatedPaymentRequestMessagePublisher;
+import com.training.food.ordering.service.domain.ports.output.repository.CustomerRepository;
+import com.training.food.ordering.service.domain.ports.output.repository.OrderRepository;
+import com.training.food.ordering.service.domain.ports.output.repository.RestaurantRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -30,12 +31,14 @@ public class OrderCreateHelper {
     private final RestaurantRepository restaurantRepository;
     private final OrderDataMapper orderDataMapper;
 
+    private final OrderCreatedPaymentRequestMessagePublisher createPublisher;
+
     @Transactional
-    public OrderCreateEvent persistOrder(CreateOrderCommand createOrderCommand) {
+    public OrderCreatedEvent persistOrder(CreateOrderCommand createOrderCommand) {
         checkCustomer(createOrderCommand.getCustomerId());
         Restaurant restaurant = checkRestaurant(createOrderCommand);
         Order order = orderDataMapper.createOrderCommandToOrder(createOrderCommand);
-        OrderCreateEvent event = orderDomainService.validateAndInitiateOrder(order, restaurant);
+        OrderCreatedEvent event = orderDomainService.validateAndInitiateOrder(order, restaurant, createPublisher);
         saveOrder(order);
         log.info("Order is created with id: {},", event.getOrder().getId().getValue());
         return event;

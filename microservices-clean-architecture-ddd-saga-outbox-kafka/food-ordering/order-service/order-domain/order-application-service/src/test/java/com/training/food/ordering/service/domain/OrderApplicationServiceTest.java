@@ -1,7 +1,11 @@
 package com.training.food.ordering.service.domain;
 
-import com.training.food.order.domain.valueobject.*;
 import com.training.food.ordering.domain.valueobject.*;
+import com.training.food.ordering.order.service.domain.entity.Customer;
+import com.training.food.ordering.order.service.domain.entity.Order;
+import com.training.food.ordering.order.service.domain.entity.Product;
+import com.training.food.ordering.order.service.domain.entity.Restaurant;
+import com.training.food.ordering.order.service.domain.exception.OrderDomainException;
 import com.training.food.ordering.service.domain.dto.create.CreateOrderCommand;
 import com.training.food.ordering.service.domain.dto.create.CreateOrderResponse;
 import com.training.food.ordering.service.domain.dto.create.OrderAddressDto;
@@ -11,11 +15,6 @@ import com.training.food.ordering.service.domain.ports.input.service.OrderApplic
 import com.training.food.ordering.service.domain.ports.output.repository.CustomerRepository;
 import com.training.food.ordering.service.domain.ports.output.repository.OrderRepository;
 import com.training.food.ordering.service.domain.ports.output.repository.RestaurantRepository;
-import com.training.food.ordering.order.service.domain.entity.Customer;
-import com.training.food.ordering.order.service.domain.entity.Order;
-import com.training.food.ordering.order.service.domain.entity.Product;
-import com.training.food.ordering.order.service.domain.entity.Restaurant;
-import com.training.food.ordering.order.service.domain.exception.OrderDomainException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;

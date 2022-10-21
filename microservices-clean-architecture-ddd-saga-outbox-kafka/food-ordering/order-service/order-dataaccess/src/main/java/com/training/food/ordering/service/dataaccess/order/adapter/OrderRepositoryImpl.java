@@ -1,11 +1,11 @@
 package com.training.food.ordering.service.dataaccess.order.adapter;
 
+import com.training.food.ordering.order.service.domain.entity.Order;
+import com.training.food.ordering.order.service.domain.valueobject.TrackingId;
 import com.training.food.ordering.service.dataaccess.order.entity.OrderEntity;
 import com.training.food.ordering.service.dataaccess.order.mapper.OrderDataAccessMapper;
 import com.training.food.ordering.service.dataaccess.order.repository.OrderJpaRepository;
 import com.training.food.ordering.service.domain.ports.output.repository.OrderRepository;
-import com.training.food.ordering.order.service.domain.entity.Order;
-import com.training.food.ordering.order.service.domain.valueobject.TrackingId;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 

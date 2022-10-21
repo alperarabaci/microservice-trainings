@@ -2,10 +2,10 @@ package com.training.food.ordering.service.messaging.publisher.kafka;
 
 import com.training.food.ordering.kafka.order.avro.model.RestaurantApprovalRequestAvroModel;
 import com.training.food.ordering.kafka.producer.service.KafkaProducer;
+import com.training.food.ordering.order.service.domain.event.OrderPaidEvent;
 import com.training.food.ordering.service.domain.config.OrderServiceConfigData;
 import com.training.food.ordering.service.domain.message.publisher.restaurantapproval.OrderPaidRestaurantRequestMessagePublisher;
 import com.training.food.ordering.service.messaging.mapper.OrderMessagingDataMapper;
-import com.training.food.ordering.order.service.domain.event.OrderPaidEvent;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

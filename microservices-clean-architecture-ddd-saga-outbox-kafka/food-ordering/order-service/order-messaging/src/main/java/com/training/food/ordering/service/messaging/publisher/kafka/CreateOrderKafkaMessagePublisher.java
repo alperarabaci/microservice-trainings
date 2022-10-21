@@ -2,10 +2,10 @@ package com.training.food.ordering.service.messaging.publisher.kafka;
 
 import com.training.food.ordering.kafka.order.avro.model.PaymentRequestAvroModel;
 import com.training.food.ordering.kafka.producer.service.KafkaProducer;
+import com.training.food.ordering.order.service.domain.event.OrderCreatedEvent;
 import com.training.food.ordering.service.domain.config.OrderServiceConfigData;
 import com.training.food.ordering.service.domain.message.publisher.payment.OrderCreatedPaymentRequestMessagePublisher;
 import com.training.food.ordering.service.messaging.mapper.OrderMessagingDataMapper;
-import com.training.food.ordering.order.service.domain.event.OrderCreateEvent;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -23,7 +23,7 @@ public class CreateOrderKafkaMessagePublisher implements OrderCreatedPaymentRequ
     private final OrderKafkaMessageHelper kafkaHelper;
 
     @Override
-    public void publish(OrderCreateEvent domainEvent) {
+    public void publish(OrderCreatedEvent domainEvent) {
         String orderId = domainEvent.getOrder().getId() .getValue().toString();
         try {
             log.info("Received OrderCreatedEvent for order id: {>", orderId);

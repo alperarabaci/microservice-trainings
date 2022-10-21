@@ -5,11 +5,11 @@ import com.training.food.ordering.order.service.domain.entity.Order;
 
 import java.time.ZonedDateTime;
 
-public class OrderPaidEvent extends OrderEvent {
+public class OrderCreatedEvent extends OrderEvent {
 
-    private final DomainEventPublisher<OrderPaidEvent> publisher;
+    private final DomainEventPublisher<OrderCreatedEvent> publisher;
 
-    public OrderPaidEvent(Order order, ZonedDateTime createdAt, DomainEventPublisher<OrderPaidEvent> publisher) {
+    public OrderCreatedEvent(Order order, ZonedDateTime createdAt, DomainEventPublisher<OrderCreatedEvent> publisher) {
         super(order, createdAt);
         this.publisher = publisher;
     }
@@ -19,3 +19,4 @@ public class OrderPaidEvent extends OrderEvent {
         publisher.publish(this);
     }
 }
+
