@@ -9,6 +9,10 @@
         <module>infrastructure</module>
         <module>customer-service</module>
         <module>payment-service</module>
+        <module>restaurant-service</module>
+        <module>restaurant-service/restaurant-domain</module>
+        <module>restaurant-service/restaurant-messaging</module>
+        <module>restaurant-service/restaurant-domain/restaurant-application-service</module>
     </modules>
 
     <parent>
