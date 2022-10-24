@@ -1,4 +1,4 @@
-package com.training.food.ordering.payment.service.publisher.kafka;
+package com.training.food.ordering.payment.service.messaging.publisher.kafka;
 
 import com.training.food.ordering.kafka.order.avro.model.PaymentResponseAvroModel;
 import com.training.food.ordering.kafka.producer.KafkaMessageHelper;
@@ -6,7 +6,7 @@ import com.training.food.ordering.kafka.producer.service.KafkaProducer;
 import com.training.food.ordering.payment.service.domain.config.PaymentServiceConfigData;
 import com.training.food.ordering.payment.service.domain.event.PaymentFailedEvent;
 import com.training.food.ordering.payment.service.domain.ports.output.message.publisher.PaymentFailedMessagePublisher;
-import com.training.food.ordering.payment.service.mapper.PaymentMessagingDataMapper;
+import com.training.food.ordering.payment.service.messaging.mapper.PaymentMessagingDataMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.support.SendResult;
