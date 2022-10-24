@@ -22,6 +22,10 @@ public class Restaurant extends AggregateRoot<RestaurantId> {
         orderDetail = builder.orderDetail;
     }
 
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     public void validateOrder(List<String> failureMessages) {
         if(orderDetail.getOrderStatus() != OrderStatus.PAID) {
             failureMessages.add("Payment is not completed for order: " + orderDetail.getId());

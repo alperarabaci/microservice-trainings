@@ -11,6 +11,12 @@ public class Product extends BaseEntity<ProductId > {
     private int quantity;
     private boolean available;
 
+    public void updateWithConfirmedNamePriceAndAvailability(String name, Money price, boolean available) {
+        this.name = name;
+        this.price = price;
+        this.available = available;
+    }
+
     public String getName() {
         return name;
     }
@@ -35,6 +41,9 @@ public class Product extends BaseEntity<ProductId > {
         available = builder.available;
     }
 
+    public static Builder newBuilder() {
+        return new Builder();
+    }
 
     public static final class Builder {
         private ProductId id;
@@ -46,9 +55,7 @@ public class Product extends BaseEntity<ProductId > {
         private Builder() {
         }
 
-        public static Builder newBuilder() {
-            return new Builder();
-        }
+
 
         public Builder id(ProductId val) {
             id = val;
