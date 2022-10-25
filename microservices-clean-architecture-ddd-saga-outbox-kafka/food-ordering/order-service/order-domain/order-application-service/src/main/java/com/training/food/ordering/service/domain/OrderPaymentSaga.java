@@ -24,36 +24,27 @@ import java.util.Optional;
 public class OrderPaymentSaga implements SagaStep<PaymentResponse, OrderPaidEvent, EmptyEvent> {
 
     private final OrderDomainService service;
-    private final OrderRepository repository;
     private final OrderPaidRestaurantRequestMessagePublisher publisher;
+    private final OrderSagaHelper sagaHelper;
 
     @Override
     @Transactional
     public OrderPaidEvent process(PaymentResponse paymentResponse) {
         log.info("Completing payment for order with id: {}", paymentResponse.getOrderId());
-        Order order = findOrder(paymentResponse.getOrderId());
-        OrderPaidEvent domainEvent = service.payOrder(order);
-        repository.save(order);
+        Order order = sagaHelper.findOrder(paymentResponse.getOrderId());
+        OrderPaidEvent domainEvent = service.payOrder(order, publisher);
+        sagaHelper.saveOrder(order);
         log.info("Order with id: {} is paid", order.getId().getValue());
         return domainEvent;
-    }
-
-    private Order findOrder(String orderId) {
-        Optional<Order> order = repository.findById(new OrderId(orderId));
-        if(order.isEmpty()) {
-            log.error("Order with id: {} could not be found!", orderId);
-            throw new OrderNotFoundException("Order with id" + orderId + " could not be found!");
-        }
-        return order.get();
     }
 
     @Override
     @Transactional
     public EmptyEvent rollback(PaymentResponse paymentResponse) {
         log.info("Canceling order with id: {}", paymentResponse.getOrderId());
-        Order order = findOrder(paymentResponse.getOrderId());
+        Order order = sagaHelper.findOrder(paymentResponse.getOrderId());
         service.cancelOrder(order, paymentResponse.getFailureMessages());
-        repository.save(order);
+        sagaHelper.saveOrder(order);
         log.info("Order with id: {} is canceled", order.getId().getValue());
         return EmptyEvent.INSTANCE;
     }
