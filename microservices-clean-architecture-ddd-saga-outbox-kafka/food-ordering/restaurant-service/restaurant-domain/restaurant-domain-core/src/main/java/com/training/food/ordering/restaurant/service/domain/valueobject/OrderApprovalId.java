@@ -4,8 +4,8 @@ import com.training.food.ordering.domain.valueobject.BaseId;
 
 import java.util.UUID;
 
-public class OrderApproveId extends BaseId<UUID> {
-    public OrderApproveId(UUID value) {
+public class OrderApprovalId extends BaseId<UUID> {
+    public OrderApprovalId(UUID value) {
         super(value);
     }
 }

@@ -5,7 +5,7 @@ import com.training.food.ordering.domain.valueobject.Money;
 import com.training.food.ordering.domain.valueobject.OrderApprovalStatus;
 import com.training.food.ordering.domain.valueobject.OrderStatus;
 import com.training.food.ordering.domain.valueobject.RestaurantId;
-import com.training.food.ordering.restaurant.service.domain.valueobject.OrderApproveId;
+import com.training.food.ordering.restaurant.service.domain.valueobject.OrderApprovalId;
 
 import java.util.List;
 import java.util.UUID;
@@ -44,7 +44,7 @@ public class Restaurant extends AggregateRoot<RestaurantId> {
 
     public void constructOrderApproval(OrderApprovalStatus orderApprovalStatus) {
         this.orderApproval = OrderApproval.builder()
-                .id(new OrderApproveId(UUID.randomUUID()))
+                .id(new OrderApprovalId(UUID.randomUUID()))
                 .restaurantId(this.getId())
                 .orderId(this.getOrderDetail().getId())
                 .approvalStatus(orderApprovalStatus)

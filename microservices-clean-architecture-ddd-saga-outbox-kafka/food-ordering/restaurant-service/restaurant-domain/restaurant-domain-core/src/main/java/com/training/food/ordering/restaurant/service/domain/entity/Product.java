@@ -41,7 +41,7 @@ public class Product extends BaseEntity<ProductId > {
         available = builder.available;
     }
 
-    public static Builder newBuilder() {
+    public static Builder builder() {
         return new Builder();
     }
 

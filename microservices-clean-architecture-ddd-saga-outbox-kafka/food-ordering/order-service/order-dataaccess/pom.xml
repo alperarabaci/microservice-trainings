@@ -36,6 +36,10 @@
             <groupId>com.training.food.order</groupId>
             <artifactId>order-application-service</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.training.food.order</groupId>
+            <artifactId>common-dataaccess</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

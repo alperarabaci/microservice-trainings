@@ -4,9 +4,9 @@ import com.training.food.ordering.domain.entity.BaseEntity;
 import com.training.food.ordering.domain.valueobject.OrderApprovalStatus;
 import com.training.food.ordering.domain.valueobject.OrderId;
 import com.training.food.ordering.domain.valueobject.RestaurantId;
-import com.training.food.ordering.restaurant.service.domain.valueobject.OrderApproveId;
+import com.training.food.ordering.restaurant.service.domain.valueobject.OrderApprovalId;
 
-public class OrderApproval extends BaseEntity<OrderApproveId> {
+public class OrderApproval extends BaseEntity<OrderApprovalId> {
 
     private final RestaurantId restaurantId;
     private final OrderId orderId;
@@ -43,7 +43,7 @@ public class OrderApproval extends BaseEntity<OrderApproveId> {
 
 
     public static final class Builder {
-        private OrderApproveId id;
+        private OrderApprovalId id;
         private RestaurantId restaurantId;
         private OrderId orderId;
         private OrderApprovalStatus approvalStatus;
@@ -51,7 +51,7 @@ public class OrderApproval extends BaseEntity<OrderApproveId> {
         private Builder() {
         }
 
-        public Builder id(OrderApproveId val) {
+        public Builder id(OrderApprovalId val) {
             id = val;
             return this;
         }
