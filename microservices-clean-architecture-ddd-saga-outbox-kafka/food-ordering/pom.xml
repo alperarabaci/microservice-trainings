@@ -138,6 +138,17 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.training.food.order</groupId>
+                <artifactId>restaurant-dataaccess</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.training.food.order</groupId>
+                <artifactId>restaurant-messaging</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- kafka -->
             <dependency>

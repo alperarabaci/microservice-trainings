@@ -41,7 +41,7 @@ public class RestaurantDataMapper {
     }
 
     private static Product createProduct(Product product) {
-        return Product.newBuilder()
+        return Product.builder()
                 .id(product.getId())
                 .quantity(product.getQuantity())
                 .build();
