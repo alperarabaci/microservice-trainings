@@ -6,4 +6,8 @@ public class OrderId extends BaseId<UUID> {
     public OrderId(UUID value) {
         super(value);
     }
+
+    public OrderId(String value) {
+        super(UUID.fromString(value));
+    }
 }

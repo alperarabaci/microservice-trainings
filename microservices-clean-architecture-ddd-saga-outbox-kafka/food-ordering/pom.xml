@@ -150,6 +150,13 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <!-- saga -->
+            <dependency>
+                <groupId>com.training.food.order</groupId>
+                <artifactId>saga</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <!-- kafka -->
             <dependency>
                 <groupId>com.training.food.order</groupId>
