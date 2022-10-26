@@ -20,14 +20,14 @@ import java.util.List;
 @Slf4j
 @Component
 @AllArgsConstructor
-public class RestaurantApproveResponseKafkaListener implements KafkaConsumer<RestaurantApprovalResponseAvroModel> {
+public class RestaurantApprovalResponseKafkaListener implements KafkaConsumer<RestaurantApprovalResponseAvroModel> {
 
     private final RestaurantApprovalResponseMessageListener listener;
     private final OrderMessagingDataMapper mapper;
 
     @Override
-    @KafkaListener(id = "{kafka-consumer-config.restaurant-consumer-group-id}",
-            topics = "order-service.restaurant-approval-response-topic-name")
+    @KafkaListener(id = "${kafka-consumer-config.restaurant-approval-consumer-group-id}",
+            topics = "${order-service.restaurant-approval-response-topic-name}")
     public void receive(@Payload  List<RestaurantApprovalResponseAvroModel> messages,
                         @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) List<String> keys,
                         @Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer> partitions,

@@ -1,14 +1,8 @@
 package com.training.food.ordering.payment.service.domain;
 
 import com.training.food.ordering.payment.service.domain.dto.PaymentRequest;
-import com.training.food.ordering.payment.service.domain.event.PaymentCanceledEvent;
-import com.training.food.ordering.payment.service.domain.event.PaymentCompletedEvent;
 import com.training.food.ordering.payment.service.domain.event.PaymentEvent;
-import com.training.food.ordering.payment.service.domain.event.PaymentFailedEvent;
 import com.training.food.ordering.payment.service.domain.ports.input.message.listener.PaymentRequestMessageListener;
-import com.training.food.ordering.payment.service.domain.ports.output.message.publisher.PaymentCanceledMessagePublisher;
-import com.training.food.ordering.payment.service.domain.ports.output.message.publisher.PaymentCompletedMessagePublisher;
-import com.training.food.ordering.payment.service.domain.ports.output.message.publisher.PaymentFailedMessagePublisher;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,7 +19,7 @@ public class PaymentRequestMessageListenerImpl implements PaymentRequestMessageL
      */
     /*
     private final PaymentCompletedMessagePublisher completedMessagePublisher;
-    private final PaymentCanceledMessagePublisher canceledMessagePublisher;
+    private final PaymentCancelledMessagePublisher cancelledMessagePublisher;
     private final PaymentFailedMessagePublisher failedMessagePublisher;
     */
 

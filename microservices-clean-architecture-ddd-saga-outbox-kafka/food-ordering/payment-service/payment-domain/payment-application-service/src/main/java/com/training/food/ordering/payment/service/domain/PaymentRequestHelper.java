@@ -9,7 +9,7 @@ import com.training.food.ordering.payment.service.domain.event.PaymentEvent;
 import com.training.food.ordering.payment.service.domain.exception.PaymentApplicationServiceException;
 import com.training.food.ordering.payment.service.domain.exception.PaymentNotFoundException;
 import com.training.food.ordering.payment.service.domain.mapper.PaymentDataMapper;
-import com.training.food.ordering.payment.service.domain.ports.output.message.publisher.PaymentCanceledMessagePublisher;
+import com.training.food.ordering.payment.service.domain.ports.output.message.publisher.PaymentCancelledMessagePublisher;
 import com.training.food.ordering.payment.service.domain.ports.output.message.publisher.PaymentCompletedMessagePublisher;
 import com.training.food.ordering.payment.service.domain.ports.output.message.publisher.PaymentFailedMessagePublisher;
 import com.training.food.ordering.payment.service.domain.ports.output.repository.CreditEntryRepository;
@@ -38,7 +38,7 @@ public class PaymentRequestHelper {
 
     private final PaymentCompletedMessagePublisher publisher;
 
-    private PaymentCanceledMessagePublisher cancelPublisher;
+    private PaymentCancelledMessagePublisher cancelPublisher;
 
     private final PaymentFailedMessagePublisher failPublisher;
 

@@ -16,7 +16,7 @@ public class KafkaMessageHelper {
             @Override
             public void onSuccess(SendResult<String, T> result) {
                 RecordMetadata metadata = result.getRecordMetadata();
-                log.info("Received successfull response from Kfka for order id: {}"
+                log.info("Received successful response from kafka for order id: {}"
                                 + "Topic: {} Partition: {} Offset: {} ",
                         orderId,
                         metadata.topic(),

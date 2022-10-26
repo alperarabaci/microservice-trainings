@@ -40,7 +40,7 @@ public class PaymentFailedKafkaMessagePublisher implements PaymentFailedMessageP
                     "PaymentResponseAvroModel");
 
             //TODO will be added saga and outbox pattern.
-            kafkaProducer.send(configData.getPaymentRequestTopicName(),
+            kafkaProducer.send(configData.getPaymentResponseTopicName(),
                     orderId,
                     model,
                     kafkaCallback);

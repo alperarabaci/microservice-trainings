@@ -4,8 +4,8 @@ import com.training.food.ordering.kafka.order.avro.model.PaymentResponseAvroMode
 import com.training.food.ordering.kafka.producer.KafkaMessageHelper;
 import com.training.food.ordering.kafka.producer.service.KafkaProducer;
 import com.training.food.ordering.payment.service.domain.config.PaymentServiceConfigData;
-import com.training.food.ordering.payment.service.domain.event.PaymentCanceledEvent;
-import com.training.food.ordering.payment.service.domain.ports.output.message.publisher.PaymentCanceledMessagePublisher;
+import com.training.food.ordering.payment.service.domain.event.PaymentCancelledEvent;
+import com.training.food.ordering.payment.service.domain.ports.output.message.publisher.PaymentCancelledMessagePublisher;
 import com.training.food.ordering.payment.service.messaging.mapper.PaymentMessagingDataMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 @Component
 @Slf4j
 @AllArgsConstructor
-public class PaymentCanceledKafkaMessagePublisher implements PaymentCanceledMessagePublisher {
+public class PaymentCancelledKafkaMessagePublisher implements PaymentCancelledMessagePublisher {
 
     private final PaymentMessagingDataMapper mapper;
     private final KafkaProducer<String, PaymentResponseAvroModel> kafkaProducer;
@@ -26,13 +26,13 @@ public class PaymentCanceledKafkaMessagePublisher implements PaymentCanceledMess
     private final KafkaMessageHelper kafkaHelper;
 
     @Override
-    public void publish(PaymentCanceledEvent domainEvent) {
+    public void publish(PaymentCancelledEvent domainEvent) {
         String orderId = domainEvent.getPayment().getOrderId().getValue().toString();
 
-        log.info("Received PaymentCanceledEvent for order id: {}", orderId);
+        log.info("Received PaymentCancelledEvent for order id: {}", orderId);
 
         try {
-            PaymentResponseAvroModel model = mapper.paymentCanceledEventToPaymentResponseAvroModel(domainEvent);
+            PaymentResponseAvroModel model = mapper.paymentCancelledEventToPaymentResponseAvroModel(domainEvent);
 
             ListenableFutureCallback<SendResult<String, PaymentResponseAvroModel>> kafkaCallback = kafkaHelper.getKafkaCallback(configData.getPaymentResponseTopicName(),
                     model,
@@ -40,7 +40,7 @@ public class PaymentCanceledKafkaMessagePublisher implements PaymentCanceledMess
                     "PaymentResponseAvroModel");
 
             //TODO will be added saga and outbox pattern.
-            kafkaProducer.send(configData.getPaymentRequestTopicName(),
+            kafkaProducer.send(configData.getPaymentResponseTopicName(),
                     orderId,
                     model,
                     kafkaCallback);

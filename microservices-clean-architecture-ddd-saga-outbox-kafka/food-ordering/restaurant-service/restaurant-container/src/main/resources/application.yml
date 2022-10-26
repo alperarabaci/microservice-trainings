@@ -38,7 +38,8 @@ kafka-config:
 kafka-producer-config:
   key-serializer-class: org.apache.kafka.common.serialization.StringSerializer
   value-serializer-class: io.confluent.kafka.serializers.KafkaAvroSerializer
-  compression-type: snappy
+  # compress-type snappy not work @M2  https://stackoverflow.com/questions/71707903/org-xerial-snappy-snappyerror-failed-to-load-native-library-no-native-library
+  compression-type: none
   acks: all
   batch-size: 16384
   batch-size-boost-factor: 100

@@ -4,7 +4,7 @@ import com.training.food.ordering.order.service.domain.event.OrderCreatedEvent;
 import com.training.food.ordering.service.domain.dto.create.CreateOrderCommand;
 import com.training.food.ordering.service.domain.dto.create.CreateOrderResponse;
 import com.training.food.ordering.service.domain.mapper.OrderDataMapper;
-import com.training.food.ordering.service.domain.message.publisher.payment.OrderCreatedPaymentRequestMessagePublisher;
+import com.training.food.ordering.service.domain.message.publisher.payment.OrderCreatePaymentRequestMessagePublisher;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -17,7 +17,7 @@ public class OrderCreateCommonHandler {
     private final OrderCreateHelper orderCreateHelper;
     private final OrderDataMapper orderDataMapper;
 
-    private final OrderCreatedPaymentRequestMessagePublisher publisher;
+    private final OrderCreatePaymentRequestMessagePublisher publisher;
 
     public CreateOrderResponse createOrder(CreateOrderCommand createOrderCommand) {
         OrderCreatedEvent event = orderCreateHelper.persistOrder(createOrderCommand);

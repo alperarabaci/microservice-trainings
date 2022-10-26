@@ -45,7 +45,7 @@ public class OrderPaymentSaga implements SagaStep<PaymentResponse, OrderPaidEven
         Order order = sagaHelper.findOrder(paymentResponse.getOrderId());
         service.cancelOrder(order, paymentResponse.getFailureMessages());
         sagaHelper.saveOrder(order);
-        log.info("Order with id: {} is canceled", order.getId().getValue());
+        log.info("Order with id: {} is cancelled", order.getId().getValue());
         return EmptyEvent.INSTANCE;
     }
 }

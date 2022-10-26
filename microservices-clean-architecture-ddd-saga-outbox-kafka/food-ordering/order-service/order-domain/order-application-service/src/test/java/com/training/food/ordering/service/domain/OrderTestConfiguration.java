@@ -2,7 +2,7 @@ package com.training.food.ordering.service.domain;
 
 import com.training.food.ordering.order.service.domain.OrderDomainService;
 import com.training.food.ordering.order.service.domain.OrderDomainServiceImpl;
-import com.training.food.ordering.service.domain.message.publisher.payment.OrderCreatedPaymentRequestMessagePublisher;
+import com.training.food.ordering.service.domain.message.publisher.payment.OrderCreatePaymentRequestMessagePublisher;
 import com.training.food.ordering.service.domain.ports.output.repository.CustomerRepository;
 import com.training.food.ordering.service.domain.ports.output.repository.OrderRepository;
 import com.training.food.ordering.service.domain.ports.output.repository.RestaurantRepository;
@@ -29,8 +29,8 @@ public class OrderTestConfiguration {
     }
 
     @Bean
-    public OrderCreatedPaymentRequestMessagePublisher orderCreatedPaymentRequestMessagePublisher() {
-        return Mockito.mock(OrderCreatedPaymentRequestMessagePublisher.class);
+    public OrderCreatePaymentRequestMessagePublisher orderCreatedPaymentRequestMessagePublisher() {
+        return Mockito.mock(OrderCreatePaymentRequestMessagePublisher.class);
     }
 
     @Bean

@@ -26,7 +26,7 @@ public class PaymentResponseMessageListenerImpl implements PaymentMessageRespons
     }
 
     @Override
-    public void paymentCanceled(PaymentResponse paymentResponse) {
+    public void paymentCancelled(PaymentResponse paymentResponse) {
         orderPaymentSaga.rollback(paymentResponse);
         log.info("Order is roll backed for order id: {} with failure messages: {}",
                 paymentResponse.getOrderId(),

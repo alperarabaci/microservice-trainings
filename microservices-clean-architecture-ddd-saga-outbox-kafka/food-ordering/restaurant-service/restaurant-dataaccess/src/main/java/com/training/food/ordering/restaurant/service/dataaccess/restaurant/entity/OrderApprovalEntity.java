@@ -3,10 +3,7 @@ package com.training.food.ordering.restaurant.service.dataaccess.restaurant.enti
 import com.training.food.ordering.domain.valueobject.OrderApprovalStatus;
 import lombok.*;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.UUID;
 
 @Getter
@@ -15,6 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name= "order_approval", schema = "restaurant")
+@Entity
 public class OrderApprovalEntity {
 
     @Id

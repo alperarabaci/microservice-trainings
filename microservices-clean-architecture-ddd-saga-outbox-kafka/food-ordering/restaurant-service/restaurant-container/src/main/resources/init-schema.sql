@@ -7,6 +7,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 DROP TABLE IF EXISTS restaurant.restaurants CASCADE;
 
 CREATE TABLE restaurant.restaurants
+(
   id uuid NOT NULL,
   name character varying COLLATE pg_catalog."default" NOT NULL,
   active Boolean NOT NULL,
@@ -20,31 +21,34 @@ CREATE TYPE approval_status AS ENUM ('APPROVED', 'REJECTED');
 DROP TABLE IF EXISTS restaurant.order_approval CASCADE;
 
 CREATE TABLE restaurant.order_approval
+(
   id uuid NOT NULL,
   restaurant_id uuid NOT NULL,
   order_id uuid NOT NULL,
   status approval_status NOT NULL,
   CONSTRAINT order_approval_pkey PRIMARY KEY (id)
-)
+);
 
 DROP TABLE IF EXISTS restaurant.products CASCADE;
 
 CREATE TABLE restaurant.products
+(
   id uuid NOT NULL,
   name character varying COLLATE pg_catalog."default" NOT NULL,
   price numeric(10, 2) NOT NULL,
   available boolean NOT NULL,
   CONSTRAINT products_pkey PRIMARY KEY (id)
-)
+);
 
 DROP TABLE IF EXISTS restaurant.restaurant_products CASCADE;
 
 CREATE TABLE restaurant.restaurant_products
+(
   id uuid NOT NULL,
   restaurant_id uuid NOT NULL,
-  product_id uuid NOT HULL,
+  product_id uuid NOT NULL,
   CONSTRAINT restaurant_products_pkey PRIMARY KEY (id)
-)
+);
 
 ALTER TABLE restaurant.restaurant_products
   ADD CONSTRAINT "FK_RESTAURANT_ID" FOREIGN KEY (restaurant_id)
@@ -62,17 +66,17 @@ ALTER TABLE restaurant. restaurant_products
 
 DROP MATERIALIZED VIEW IF EXISTS restaurant.order_restaurant_m_view;
 
-CREATE MATERIALIZED VIEW restaurant.order_restaurant_m_view;
+CREATE MATERIALIZED VIEW restaurant.order_restaurant_m_view
 TABLESPACE pg_default
 AS
-SELECT r.id AS restaurant_id,
+ SELECT r.id AS restaurant_id,
     r.name AS restaurant_name,
     r.active AS restaurant_active,
     p.id AS product_id,
-    p.name AS product name,
-    P.price AS product_price,
+    p.name AS product_name,
+    p.price AS product_price,
     p.available AS product_available
-  FROM restaurant.restaurants r,
+   FROM restaurant.restaurants r,
     restaurant.products p,
     restaurant.restaurant_products rp
   WHERE r.id = rp.restaurant_id AND p.id = rp.product_id

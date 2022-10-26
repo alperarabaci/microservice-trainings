@@ -41,13 +41,12 @@ public class PaymentCompletedKafkaMessagePublisher implements PaymentCompletedMe
                     "PaymentResponseAvroModel");
 
             //TODO will be added saga and outbox pattern.
-            kafkaProducer.send(configData.getPaymentRequestTopicName(),
+            kafkaProducer.send(configData.getPaymentResponseTopicName(),
                     orderId,
                     model,
                     kafkaCallback);
 
-            log.info("Error while sending PaymentResponseAvroModel message" +
-                    "to kafka with order id: {}, error {}", orderId);
+            log.info("PaymentResponseAvroModel sent to kafka for order id: {}", orderId);
         } catch (Exception e) {
             log.error("Error while sending PaymentResponseAvroModel message" +
                     " to kafka with order id: {}, error {}", orderId, e.getMessage());

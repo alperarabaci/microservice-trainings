@@ -8,7 +8,7 @@ import com.training.food.ordering.order.service.domain.event.OrderCreatedEvent;
 import com.training.food.ordering.order.service.domain.exception.OrderDomainException;
 import com.training.food.ordering.service.domain.dto.create.CreateOrderCommand;
 import com.training.food.ordering.service.domain.mapper.OrderDataMapper;
-import com.training.food.ordering.service.domain.message.publisher.payment.OrderCreatedPaymentRequestMessagePublisher;
+import com.training.food.ordering.service.domain.message.publisher.payment.OrderCreatePaymentRequestMessagePublisher;
 import com.training.food.ordering.service.domain.ports.output.repository.CustomerRepository;
 import com.training.food.ordering.service.domain.ports.output.repository.OrderRepository;
 import com.training.food.ordering.service.domain.ports.output.repository.RestaurantRepository;
@@ -31,7 +31,7 @@ public class OrderCreateHelper {
     private final RestaurantRepository restaurantRepository;
     private final OrderDataMapper orderDataMapper;
 
-    private final OrderCreatedPaymentRequestMessagePublisher createPublisher;
+    private final OrderCreatePaymentRequestMessagePublisher createPublisher;
 
     @Transactional
     public OrderCreatedEvent persistOrder(CreateOrderCommand createOrderCommand) {

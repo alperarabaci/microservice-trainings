@@ -7,7 +7,7 @@ import com.training.food.ordering.payment.service.domain.entity.CreditEntry;
 import com.training.food.ordering.payment.service.domain.entity.CreditHistory;
 import com.training.food.ordering.payment.service.domain.entity.CreditHistoryId;
 import com.training.food.ordering.payment.service.domain.entity.Payment;
-import com.training.food.ordering.payment.service.domain.event.PaymentCanceledEvent;
+import com.training.food.ordering.payment.service.domain.event.PaymentCancelledEvent;
 import com.training.food.ordering.payment.service.domain.event.PaymentCompletedEvent;
 import com.training.food.ordering.payment.service.domain.event.PaymentEvent;
 import com.training.food.ordering.payment.service.domain.valueobject.TransactionType;
@@ -37,7 +37,8 @@ public class PaymentDomainServiceImpl implements PaymentDomainService {
             log.info("Payment is initiated for order id: {}", payment.getOrderId().getValue());
             payment.updateStatus(PaymentStatus.COMPLETED);
         } else {
-            log.info("Payment initiation is failed for order id: {}", payment.getOrderId());
+            log.info("Payment initiation is failed for order id: {}, messages: {}", payment.getOrderId(),
+                    String.join(",", failureMessages));
             payment.updateStatus(PaymentStatus.FAILED);
         }
         return PaymentCompletedEvent.createdAtNow(payment, publisher);
@@ -47,24 +48,23 @@ public class PaymentDomainServiceImpl implements PaymentDomainService {
                                        List<CreditHistory> creditHistories,
                                        List<String> failureMessages) {
         Money totalCreditHistory = getTotalHistoryAmount(creditHistories, TransactionType.CREDIT);
-
         Money totalDebitHistory = getTotalHistoryAmount(creditHistories, TransactionType.DEBIT);
 
-        if (!totalDebitHistory.isGreaterThan(totalCreditHistory)) {
+        if (totalDebitHistory.isGreaterThan(totalCreditHistory)) {
             String message = String.format("Customer with id: %s doesn't have enough credit according to credit history",
                     creditEntry.getCustomerId().getValue());
             log.error(message);
             failureMessages.add(message);
         }
-        if (!creditEntry.getTotalCreditAmount().equals(totalCreditHistory.subtract(totalCreditHistory))) {
+        if (!creditEntry.getTotalCreditAmount().equals(totalCreditHistory.subtract(totalDebitHistory))) {
             String message = String.format("Credit history total is not equal to current credit for customer id: %s", creditEntry.getCustomerId().getValue());
             failureMessages.add(message);
         }
     }
 
-    private static Money getTotalHistoryAmount(List<CreditHistory> creditHistories, TransactionType credit) {
+    private Money getTotalHistoryAmount(List<CreditHistory> creditHistories, TransactionType transactionType) {
         return creditHistories.stream()
-                .filter(creditHistory -> credit == creditHistory.getTransactionType())
+                .filter(creditHistory -> transactionType == creditHistory.getTransactionType())
                 .map(CreditHistory::getAmount)
                 .reduce(Money.ZERO, Money::add);
     }
@@ -101,7 +101,7 @@ public class PaymentDomainServiceImpl implements PaymentDomainService {
                                                  CreditEntry creditEntry,
                                                  List<CreditHistory> creditHistories,
                                                  List<String> failureMessages,
-                                                 DomainEventPublisher<PaymentCanceledEvent> publisher) {
+                                                 DomainEventPublisher<PaymentCancelledEvent> publisher) {
 
         payment.validatePayment(failureMessages);
         addCreditEntry(payment, creditEntry);
@@ -110,11 +110,12 @@ public class PaymentDomainServiceImpl implements PaymentDomainService {
         if (failureMessages.isEmpty()) {
             log.info("Payment is cancelled for order id: {}", payment.getOrderId().getValue());
             payment.updateStatus(PaymentStatus.CANCELLED);
-            return PaymentCanceledEvent.createdAtNow(payment, publisher);
+            return PaymentCancelledEvent.createdAtNow(payment, publisher);
         } else {
-            log.info("Payment cancellation is failed for order id: {}", payment.getOrderId().getValue());
+            log.info("Payment cancellation is failed for order id: {}, error messages: {}", payment.getOrderId().getValue(),
+                    String.join(",", failureMessages));
             payment.updateStatus(PaymentStatus.FAILED);
-            return PaymentCanceledEvent.createdAtNow(payment, failureMessages, publisher);
+            return PaymentCancelledEvent.createdAtNow(payment, failureMessages, publisher);
         }
 
     }
