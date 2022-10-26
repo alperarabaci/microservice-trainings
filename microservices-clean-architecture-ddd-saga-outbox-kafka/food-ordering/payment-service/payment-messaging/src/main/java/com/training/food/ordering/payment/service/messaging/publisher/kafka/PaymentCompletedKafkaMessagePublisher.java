@@ -7,7 +7,6 @@ import com.training.food.ordering.payment.service.domain.config.PaymentServiceCo
 import com.training.food.ordering.payment.service.domain.event.PaymentCompletedEvent;
 import com.training.food.ordering.payment.service.domain.ports.output.message.publisher.PaymentCompletedMessagePublisher;
 import com.training.food.ordering.payment.service.messaging.mapper.PaymentMessagingDataMapper;
-
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.support.SendResult;

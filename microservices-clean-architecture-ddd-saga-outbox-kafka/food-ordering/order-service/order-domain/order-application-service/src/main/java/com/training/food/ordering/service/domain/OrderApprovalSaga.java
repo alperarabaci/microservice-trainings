@@ -7,7 +7,6 @@ import com.training.food.ordering.order.service.domain.event.OrderCancelledEvent
 import com.training.food.ordering.saga.SagaStep;
 import com.training.food.ordering.service.domain.dto.message.RestaurantApprovalResponse;
 import com.training.food.ordering.service.domain.message.publisher.payment.OrderCancelledPaymentRequestMessagePublisher;
-import com.training.food.ordering.service.domain.ports.output.repository.OrderRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
