@@ -2,7 +2,7 @@ package com.training.food.ordering.service.domain.ports.output.repository;
 
 import com.training.food.order.outbox.OutboxStatus;
 import com.training.food.ordering.saga.SagaStatus;
-import com.training.food.ordering.service.domain.outbox.model.approval.OrderApprovalOutboxMessage;O
+import com.training.food.ordering.service.domain.outbox.model.approval.OrderApprovalOutboxMessage;
 
 import java.util.List;
 import java.util.Optional;
