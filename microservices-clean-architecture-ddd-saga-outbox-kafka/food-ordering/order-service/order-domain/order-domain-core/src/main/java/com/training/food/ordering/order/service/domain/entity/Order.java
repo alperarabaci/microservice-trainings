@@ -95,12 +95,12 @@ public class Order extends AggregateRoot<OrderId> {
         if(orderStatus != OrderStatus.PAID) {
             throw new OrderDomainException("Order is not in correct state for initCancel operation!");
         }
-        orderStatus = OrderStatus.CANCELING;
+        orderStatus = OrderStatus.CANCELLING;
         updateFailureMessages(failureMessage);
     }
 
     public void cancel(List<String> failureMessage) {
-        if(!(orderStatus != OrderStatus.CANCELING || orderStatus != OrderStatus.PAID)) {
+        if(!(orderStatus != OrderStatus.CANCELLING || orderStatus != OrderStatus.PAID)) {
             throw new OrderDomainException("Order is not in correct state for cancel operation!");
         }
         orderStatus = OrderStatus.CANCELLED;

@@ -34,7 +34,8 @@ public class PaymentCancelledKafkaMessagePublisher implements PaymentCancelledMe
         try {
             PaymentResponseAvroModel model = mapper.paymentCancelledEventToPaymentResponseAvroModel(domainEvent);
 
-            ListenableFutureCallback<SendResult<String, PaymentResponseAvroModel>> kafkaCallback = kafkaHelper.getKafkaCallback(configData.getPaymentResponseTopicName(),
+            ListenableFutureCallback<SendResult<String, PaymentResponseAvroModel>> kafkaCallback = kafkaHelper.getKafkaCallback(
+                    configData.getPaymentResponseTopicName(),
                     model,
                     orderId,
                     "PaymentResponseAvroModel");
@@ -45,8 +46,7 @@ public class PaymentCancelledKafkaMessagePublisher implements PaymentCancelledMe
                     model,
                     kafkaCallback);
 
-            log.info("Error while sending PaymentResponseAvroModel message" +
-                    "to kafka with order id: {}, error {}", orderId);
+            log.info("PaymentResponseAvroModel sent to kafka for order id: {}", orderId);
         } catch (Exception e) {
             log.error("Error while sending PaymentResponseAvroModel message" +
                     " to kafka with order id: {}, error {}", orderId, e.getMessage());

@@ -30,5 +30,6 @@ public class RestaurantApprovalResponseMessageListenerImpl implements Restaurant
         log.info("Publishing order cancelled event for order id: {} with failure messages: {}",
                 response.getOrderId(),
                 String.join(FAILURE_MESSAGE_DELIMITER, response.getFailureMessages()));
+        domainEvent.fire();
     }
 }

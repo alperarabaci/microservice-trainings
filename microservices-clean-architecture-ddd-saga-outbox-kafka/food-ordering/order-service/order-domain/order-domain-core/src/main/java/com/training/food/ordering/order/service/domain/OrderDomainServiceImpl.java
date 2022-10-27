@@ -68,6 +68,7 @@ public class OrderDomainServiceImpl implements OrderDomainService{
                                                   List<String> failureMessages,
                                                   DomainEventPublisher<OrderCancelledEvent> publisher) {
         order.initCancel(failureMessages);
+        log.info("Order payment is cancelling for order id: {}", order.getId().getValue());
         return new OrderCancelledEvent(order, ZonedDateTime.now(ZoneId.of(UTC)), publisher);
     }
 

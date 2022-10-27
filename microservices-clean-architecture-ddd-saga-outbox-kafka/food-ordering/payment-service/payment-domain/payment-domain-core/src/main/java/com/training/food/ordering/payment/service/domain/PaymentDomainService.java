@@ -7,6 +7,7 @@ import com.training.food.ordering.payment.service.domain.entity.Payment;
 import com.training.food.ordering.payment.service.domain.event.PaymentCancelledEvent;
 import com.training.food.ordering.payment.service.domain.event.PaymentCompletedEvent;
 import com.training.food.ordering.payment.service.domain.event.PaymentEvent;
+import com.training.food.ordering.payment.service.domain.event.PaymentFailedEvent;
 
 import java.util.List;
 
@@ -16,7 +17,8 @@ public interface PaymentDomainService {
                                             CreditEntry creditEntry,
                                             List<CreditHistory> creditHistories,
                                             List<String> failureMessages,
-                                            DomainEventPublisher<PaymentCompletedEvent> publisher);
+                                            DomainEventPublisher<PaymentCompletedEvent> publisher,
+                                            DomainEventPublisher<PaymentFailedEvent> failedPublisher);
 
     PaymentEvent validateAndCancelPayment(Payment payment,
                                           CreditEntry creditEntry,
