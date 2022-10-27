@@ -34,7 +34,7 @@ public class OrderRepositoryImpl implements OrderRepository {
 
     @Override
     public Optional<Order> findById(OrderId orderId) {
-        return repository.findById(orderId)
+        return repository.findById(orderId.getValue())
                 .map(mapper::orderEntityToOrder);
     }
 }
