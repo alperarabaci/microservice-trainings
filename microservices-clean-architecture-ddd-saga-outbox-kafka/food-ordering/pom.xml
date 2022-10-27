@@ -157,6 +157,13 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <!-- outbox -->
+            <dependency>
+                <groupId>com.training.food.order</groupId>
+                <artifactId>outbox</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <!-- kafka -->
             <dependency>
                 <groupId>com.training.food.order</groupId>
