@@ -1,8 +1,10 @@
 package com.training.food.ordering.service.domain;
 
 import com.training.food.ordering.domain.valueobject.OrderId;
+import com.training.food.ordering.domain.valueobject.OrderStatus;
 import com.training.food.ordering.order.service.domain.entity.Order;
 import com.training.food.ordering.order.service.domain.exception.OrderNotFoundException;
+import com.training.food.ordering.saga.SagaStatus;
 import com.training.food.ordering.service.domain.ports.output.repository.OrderRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,5 +30,23 @@ public class OrderSagaHelper {
 
     void saveOrder(Order order) {
         repository.save(order);
+    }
+
+    /**
+     * I would prefer orderStatus manage this.
+     */
+    SagaStatus orderStatusToSagaStatus(OrderStatus orderStatus) {
+        switch (orderStatus) {
+            case PAID:
+                return SagaStatus.PROCESSING;
+            case APPROVED:
+                return SagaStatus.SUCCEEDED;
+            case CANCELLING:
+                return SagaStatus.COMPENSATING;
+            case CANCELLED:
+                return SagaStatus.COMPENSATED;
+            default:
+                return SagaStatus.STARTED;
+        }
     }
 }
