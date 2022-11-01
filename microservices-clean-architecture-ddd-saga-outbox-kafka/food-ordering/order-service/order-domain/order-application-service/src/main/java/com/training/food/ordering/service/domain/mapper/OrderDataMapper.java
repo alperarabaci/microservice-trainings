@@ -5,6 +5,7 @@ import com.training.food.ordering.order.service.domain.entity.Order;
 import com.training.food.ordering.order.service.domain.entity.OrderItem;
 import com.training.food.ordering.order.service.domain.entity.Product;
 import com.training.food.ordering.order.service.domain.entity.Restaurant;
+import com.training.food.ordering.order.service.domain.event.OrderCancelledEvent;
 import com.training.food.ordering.order.service.domain.event.OrderCreatedEvent;
 import com.training.food.ordering.order.service.domain.event.OrderPaidEvent;
 import com.training.food.ordering.order.service.domain.valueobject.StreetAddress;
@@ -110,6 +111,16 @@ public class OrderDataMapper {
                 .build();
     }
 
+    public OrderPaymentEventPayload orderCancelledEventToOrderPaymentEventPayload(OrderCancelledEvent
+                                                                                          orderCancelledEvent) {
+        return OrderPaymentEventPayload.builder()
+                .customerId(orderCancelledEvent.getOrder().getCustomerId().getValue().toString())
+                .orderId(orderCancelledEvent.getOrder().getId().getValue().toString())
+                .price(orderCancelledEvent.getOrder().getPrice().getAmount())
+                .createdAt(orderCancelledEvent.getCreatedAt())
+                .paymentOrderStatus(PaymentOrderStatus.CANCELLED.name())
+                .build();
+    }
 
 }
 
