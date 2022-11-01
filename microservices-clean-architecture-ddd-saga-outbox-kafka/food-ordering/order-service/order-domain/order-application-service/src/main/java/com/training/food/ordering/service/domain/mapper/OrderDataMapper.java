@@ -1,19 +1,18 @@
 package com.training.food.ordering.service.domain.mapper;
 
-import com.training.food.ordering.domain.valueobject.CustomerId;
-import com.training.food.ordering.domain.valueobject.Money;
-import com.training.food.ordering.domain.valueobject.ProductId;
-import com.training.food.ordering.domain.valueobject.RestaurantId;
+import com.training.food.ordering.domain.valueobject.*;
 import com.training.food.ordering.order.service.domain.entity.Order;
 import com.training.food.ordering.order.service.domain.entity.OrderItem;
 import com.training.food.ordering.order.service.domain.entity.Product;
 import com.training.food.ordering.order.service.domain.entity.Restaurant;
+import com.training.food.ordering.order.service.domain.event.OrderCreatedEvent;
 import com.training.food.ordering.order.service.domain.valueobject.StreetAddress;
 import com.training.food.ordering.service.domain.dto.create.CreateOrderCommand;
 import com.training.food.ordering.service.domain.dto.create.CreateOrderResponse;
 import com.training.food.ordering.service.domain.dto.create.OrderAddressDto;
 import com.training.food.ordering.service.domain.dto.create.OrderItemDto;
 import com.training.food.ordering.service.domain.dto.track.TrackOrderResponse;
+import com.training.food.ordering.service.domain.outbox.model.payment.OrderPaymentEventPayload;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -80,6 +79,17 @@ public class OrderDataMapper {
                 orderAddress.getPostalCode(),
                 orderAddress.getCity()
         );
+    }
+
+
+    public OrderPaymentEventPayload orderCreatedEventToOrderPaymentEventPayload(OrderCreatedEvent orderCreatedEvent) {
+        return OrderPaymentEventPayload.builder()
+                .customerId(orderCreatedEvent.getOrder().getCustomerId().getValue().toString())
+                .orderId(orderCreatedEvent.getOrder().getId().getValue().toString())
+                .price(orderCreatedEvent.getOrder().getPrice().getAmount())
+                .createdAt(orderCreatedEvent.getCreatedAt())
+                .paymentOrderStatus(PaymentOrderStatus.PENDING.name())
+                .build();
     }
 
 

@@ -8,7 +8,6 @@ import com.training.food.ordering.order.service.domain.event.OrderCreatedEvent;
 import com.training.food.ordering.order.service.domain.exception.OrderDomainException;
 import com.training.food.ordering.service.domain.dto.create.CreateOrderCommand;
 import com.training.food.ordering.service.domain.mapper.OrderDataMapper;
-import com.training.food.ordering.service.domain.message.publisher.payment.OrderCreatePaymentRequestMessagePublisher;
 import com.training.food.ordering.service.domain.ports.output.repository.CustomerRepository;
 import com.training.food.ordering.service.domain.ports.output.repository.OrderRepository;
 import com.training.food.ordering.service.domain.ports.output.repository.RestaurantRepository;
@@ -31,14 +30,13 @@ public class OrderCreateHelper {
     private final RestaurantRepository restaurantRepository;
     private final OrderDataMapper orderDataMapper;
 
-    private final OrderCreatePaymentRequestMessagePublisher createPublisher;
 
     @Transactional
     public OrderCreatedEvent persistOrder(CreateOrderCommand createOrderCommand) {
         checkCustomer(createOrderCommand.getCustomerId());
         Restaurant restaurant = checkRestaurant(createOrderCommand);
         Order order = orderDataMapper.createOrderCommandToOrder(createOrderCommand);
-        OrderCreatedEvent event = orderDomainService.validateAndInitiateOrder(order, restaurant, createPublisher);
+        OrderCreatedEvent event = orderDomainService.validateAndInitiateOrder(order, restaurant);
         saveOrder(order);
         log.info("Order is created with id: {},", event.getOrder().getId().getValue());
         return event;
