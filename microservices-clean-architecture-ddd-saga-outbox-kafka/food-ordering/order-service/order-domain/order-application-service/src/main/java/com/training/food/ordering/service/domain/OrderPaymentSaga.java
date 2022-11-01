@@ -1,7 +1,6 @@
 package com.training.food.ordering.service.domain;
 
 import com.training.food.order.outbox.OutboxStatus;
-import com.training.food.ordering.domain.event.EmptyEvent;
 import com.training.food.ordering.domain.valueobject.OrderId;
 import com.training.food.ordering.domain.valueobject.OrderStatus;
 import com.training.food.ordering.domain.valueobject.PaymentStatus;
