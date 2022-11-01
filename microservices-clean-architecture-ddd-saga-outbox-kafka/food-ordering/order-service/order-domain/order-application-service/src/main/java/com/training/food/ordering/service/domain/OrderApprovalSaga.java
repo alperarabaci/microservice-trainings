@@ -6,7 +6,6 @@ import com.training.food.ordering.order.service.domain.entity.Order;
 import com.training.food.ordering.order.service.domain.event.OrderCancelledEvent;
 import com.training.food.ordering.saga.SagaStep;
 import com.training.food.ordering.service.domain.dto.message.RestaurantApprovalResponse;
-import com.training.food.ordering.service.domain.message.publisher.payment.OrderCancelledPaymentRequestMessagePublisher;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -19,7 +18,6 @@ public class OrderApprovalSaga implements SagaStep<RestaurantApprovalResponse, E
 
     private final OrderDomainService service;
     private final OrderSagaHelper sagaHelper;
-    private final OrderCancelledPaymentRequestMessagePublisher publisher;
 
     @Transactional
     @Override
@@ -38,8 +36,7 @@ public class OrderApprovalSaga implements SagaStep<RestaurantApprovalResponse, E
         log.info("Cancelling order with id: {}", response.getOrderId());
         Order order = sagaHelper.findOrder(response.getOrderId());
         OrderCancelledEvent domainEvent = service.cancelOrderPayment(order,
-                response.getFailureMessages(),
-                publisher);
+                response.getFailureMessages());
         sagaHelper.saveOrder(order);
         log.info("Order with id: {} is canceling", order.getId().getValue());
         return domainEvent;

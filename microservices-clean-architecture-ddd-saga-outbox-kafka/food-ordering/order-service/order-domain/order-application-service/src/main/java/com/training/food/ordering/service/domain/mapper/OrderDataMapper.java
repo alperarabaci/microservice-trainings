@@ -6,12 +6,15 @@ import com.training.food.ordering.order.service.domain.entity.OrderItem;
 import com.training.food.ordering.order.service.domain.entity.Product;
 import com.training.food.ordering.order.service.domain.entity.Restaurant;
 import com.training.food.ordering.order.service.domain.event.OrderCreatedEvent;
+import com.training.food.ordering.order.service.domain.event.OrderPaidEvent;
 import com.training.food.ordering.order.service.domain.valueobject.StreetAddress;
 import com.training.food.ordering.service.domain.dto.create.CreateOrderCommand;
 import com.training.food.ordering.service.domain.dto.create.CreateOrderResponse;
 import com.training.food.ordering.service.domain.dto.create.OrderAddressDto;
 import com.training.food.ordering.service.domain.dto.create.OrderItemDto;
 import com.training.food.ordering.service.domain.dto.track.TrackOrderResponse;
+import com.training.food.ordering.service.domain.outbox.model.approval.OrderApprovalEventPayload;
+import com.training.food.ordering.service.domain.outbox.model.approval.OrderApprovalEventProduct;
 import com.training.food.ordering.service.domain.outbox.model.payment.OrderPaymentEventPayload;
 import org.springframework.stereotype.Component;
 
@@ -89,6 +92,21 @@ public class OrderDataMapper {
                 .price(orderCreatedEvent.getOrder().getPrice().getAmount())
                 .createdAt(orderCreatedEvent.getCreatedAt())
                 .paymentOrderStatus(PaymentOrderStatus.PENDING.name())
+                .build();
+    }
+
+    public OrderApprovalEventPayload orderPaidEventToOrderApprovalEventPayload(OrderPaidEvent orderPaidEvent) {
+        return OrderApprovalEventPayload.builder()
+                .orderId(orderPaidEvent.getOrder().getId().getValue().toString())
+                .restaurantId(orderPaidEvent.getOrder().getRestaurantId().getValue().toString())
+                .paymentOrderStatus(RestaurantOrderStatus.PAID.name())
+                .products(orderPaidEvent.getOrder().getItems().stream().map(orderItem ->
+                        OrderApprovalEventProduct.builder()
+                                .id(orderItem.getProduct().getId().getValue().toString())
+                                .quantity(orderItem.getQuantity())
+                                .build()).collect(Collectors.toList()))
+                .price(orderPaidEvent.getOrder().getPrice().getAmount())
+                .createdAt(orderPaidEvent.getCreatedAt())
                 .build();
     }
 

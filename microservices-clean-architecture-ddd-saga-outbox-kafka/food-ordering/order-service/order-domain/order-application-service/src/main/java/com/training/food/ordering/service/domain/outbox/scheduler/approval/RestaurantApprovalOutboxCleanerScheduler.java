@@ -41,5 +41,5 @@ public class RestaurantApprovalOutboxCleanerScheduler implements OutboxScheduler
             log.info("{} OrderApprovalOutboxMessage deleted!", outboxMessages.size());
         }
     }
-    
+
 }
