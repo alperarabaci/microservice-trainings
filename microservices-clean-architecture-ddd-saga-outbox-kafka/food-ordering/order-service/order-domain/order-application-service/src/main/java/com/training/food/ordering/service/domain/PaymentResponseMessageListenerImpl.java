@@ -1,6 +1,5 @@
 package com.training.food.ordering.service.domain;
 
-import com.training.food.ordering.order.service.domain.event.OrderPaidEvent;
 import com.training.food.ordering.service.domain.dto.message.PaymentResponse;
 import com.training.food.ordering.service.domain.ports.input.message.listener.payment.PaymentMessageResponseListener;
 import lombok.AllArgsConstructor;

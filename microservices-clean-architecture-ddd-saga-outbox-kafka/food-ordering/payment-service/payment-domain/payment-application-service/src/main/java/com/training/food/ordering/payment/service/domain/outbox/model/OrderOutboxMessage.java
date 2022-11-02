@@ -1,7 +1,6 @@
 package com.training.food.ordering.payment.service.domain.outbox.model;
 
 import com.training.food.order.outbox.OutboxStatus;
-import com.training.food.ordering.domain.valueobject.OrderStatus;
 import com.training.food.ordering.domain.valueobject.PaymentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

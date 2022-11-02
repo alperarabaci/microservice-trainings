@@ -1,6 +1,5 @@
 package com.training.food.ordering.service.domain;
 
-import com.training.food.ordering.order.service.domain.event.OrderCancelledEvent;
 import com.training.food.ordering.service.domain.dto.message.RestaurantApprovalResponse;
 import com.training.food.ordering.service.domain.ports.input.message.listener.restaurantapproval.RestaurantApprovalResponseMessageListener;
 import lombok.AllArgsConstructor;

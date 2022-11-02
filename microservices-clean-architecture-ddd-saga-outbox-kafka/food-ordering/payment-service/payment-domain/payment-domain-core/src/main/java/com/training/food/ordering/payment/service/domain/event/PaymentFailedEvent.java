@@ -1,6 +1,5 @@
 package com.training.food.ordering.payment.service.domain.event;
 
-import com.training.food.ordering.domain.event.publisher.DomainEventPublisher;
 import com.training.food.ordering.payment.service.domain.entity.Payment;
 
 import java.time.ZonedDateTime;

@@ -1,6 +1,5 @@
 package com.training.food.ordering.payment.service.domain;
 
-import com.training.food.ordering.domain.event.publisher.DomainEventPublisher;
 import com.training.food.ordering.domain.valueobject.Money;
 import com.training.food.ordering.domain.valueobject.PaymentStatus;
 import com.training.food.ordering.payment.service.domain.entity.CreditEntry;
