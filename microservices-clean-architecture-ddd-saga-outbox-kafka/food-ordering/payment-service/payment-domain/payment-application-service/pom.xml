@@ -23,10 +23,14 @@
             <groupId>com.training.food.order</groupId>
             <artifactId>common-domain</artifactId>
         </dependency>
-        <!-- outbox -->
+        <!-- outbox & saga -->
         <dependency>
             <groupId>com.training.food.order</groupId>
             <artifactId>outbox</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.training.food.order</groupId>
+            <artifactId>saga</artifactId>
         </dependency>
         <!-- spring-->
         <dependency>
