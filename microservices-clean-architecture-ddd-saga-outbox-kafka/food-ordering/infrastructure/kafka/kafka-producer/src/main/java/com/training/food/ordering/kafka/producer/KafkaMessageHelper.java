@@ -1,6 +1,10 @@
 package com.training.food.ordering.kafka.producer;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.training.food.order.outbox.OutboxStatus;
+import com.training.food.ordering.order.service.domain.exception.OrderDomainException;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.RecordMetadata;
 import org.springframework.kafka.support.SendResult;
@@ -11,7 +15,10 @@ import java.util.function.BiConsumer;
 
 @Slf4j
 @Component
+@AllArgsConstructor
 public class KafkaMessageHelper {
+
+    private final ObjectMapper objectMapper;
 
     public <T, U> ListenableFutureCallback<SendResult<String, T>> getKafkaCallback(String responseTopicName,
                                                                                 T avroModel,
@@ -49,4 +56,12 @@ public class KafkaMessageHelper {
         };
     }
 
+    public <T> T getOrderEventPayload(String payload, Class<T> outputType) {
+        try {
+            return objectMapper.readValue(payload, outputType);
+        } catch (JsonProcessingException e) {
+            log.error("Could not read {} object!", outputType.getName(), e);
+            throw new OrderDomainException("Could not read OrderPaymentEventPayload object!", e);
+        }
+    }
 }
