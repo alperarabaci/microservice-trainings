@@ -15,11 +15,6 @@ public interface ApprovalOutboxRepository {
     Optional<List<OrderApprovalOutboxMessage>> findByTypeAndOutboxStatusAndSagaStatus(String type,
                                                                                      OutboxStatus outboxStatus,
                                                                                      SagaStatus... sagaStatuses);
-
-    Optional<OrderApprovalOutboxMessage> findByTypeAndOSagaIdAndSagaStatus(String type,
-                                                                          UUID sagaId,
-                                                                          SagaStatus... sagaStatuses);
-
     void deleteByTypeAndOutboxStatusAndSagaStatus(String type,
                                                   OutboxStatus outboxStatus,
                                                   SagaStatus... sagaStatuses);
