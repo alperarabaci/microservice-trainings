@@ -80,7 +80,7 @@ public class OrderPaymentSaga implements SagaStep<PaymentResponse> {
                 OutboxStatus.STARTED,
                 UUID.fromString(paymentResponse.getSagaId()));
         
-        log.info("Order with id: {} is paid", domainEvent.getOrder().getId().getValue());
+        log.error("Order with id: {} is paid", domainEvent.getOrder().getId().getValue());
     }
 
     private Order findOrder(String orderId) {
