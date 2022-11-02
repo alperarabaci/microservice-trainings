@@ -1,6 +1,5 @@
 package com.training.food.ordering.order.service.domain;
 
-import com.training.food.ordering.domain.event.publisher.DomainEventPublisher;
 import com.training.food.ordering.order.service.domain.entity.Order;
 import com.training.food.ordering.order.service.domain.entity.Restaurant;
 import com.training.food.ordering.order.service.domain.event.OrderCancelledEvent;

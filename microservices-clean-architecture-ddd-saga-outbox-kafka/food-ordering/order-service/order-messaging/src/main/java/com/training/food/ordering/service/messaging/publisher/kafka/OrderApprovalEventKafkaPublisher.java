@@ -1,7 +1,6 @@
 package com.training.food.ordering.service.messaging.publisher.kafka;
 
 import com.training.food.order.outbox.OutboxStatus;
-import com.training.food.ordering.kafka.order.avro.model.PaymentRequestAvroModel;
 import com.training.food.ordering.kafka.order.avro.model.RestaurantApprovalRequestAvroModel;
 import com.training.food.ordering.kafka.producer.KafkaMessageHelper;
 import com.training.food.ordering.kafka.producer.service.KafkaProducer;
@@ -12,9 +11,7 @@ import com.training.food.ordering.service.domain.ports.output.message.publisher.
 import com.training.food.ordering.service.messaging.mapper.OrderMessagingDataMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
-import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import java.util.function.BiConsumer;
 

@@ -1,6 +1,5 @@
 package com.training.food.ordering.order.service.domain.event;
 
-import com.training.food.ordering.domain.event.publisher.DomainEventPublisher;
 import com.training.food.ordering.order.service.domain.entity.Order;
 
 import java.time.ZonedDateTime;

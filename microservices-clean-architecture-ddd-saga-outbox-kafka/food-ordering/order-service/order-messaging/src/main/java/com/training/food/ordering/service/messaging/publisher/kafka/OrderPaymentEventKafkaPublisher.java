@@ -1,13 +1,9 @@
 package com.training.food.ordering.service.messaging.publisher.kafka;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.training.food.order.outbox.OutboxStatus;
-import com.training.food.ordering.kafka.order.avro.model.PaymentOrderStatus;
 import com.training.food.ordering.kafka.order.avro.model.PaymentRequestAvroModel;
 import com.training.food.ordering.kafka.producer.KafkaMessageHelper;
 import com.training.food.ordering.kafka.producer.service.KafkaProducer;
-import com.training.food.ordering.order.service.domain.exception.OrderDomainException;
 import com.training.food.ordering.service.domain.config.OrderServiceConfigData;
 import com.training.food.ordering.service.domain.outbox.model.payment.OrderPaymentEventPayload;
 import com.training.food.ordering.service.domain.outbox.model.payment.OrderPaymentOutboxMessage;
@@ -15,11 +11,8 @@ import com.training.food.ordering.service.domain.ports.output.message.publisher.
 import com.training.food.ordering.service.messaging.mapper.OrderMessagingDataMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
-import org.springframework.util.concurrent.ListenableFutureCallback;
 
-import java.util.UUID;
 import java.util.function.BiConsumer;
 
 @Slf4j
