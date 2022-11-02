@@ -1,6 +1,5 @@
 package com.training.food.ordering.payment.service.domain.event;
 
-import com.training.food.ordering.domain.event.publisher.DomainEventPublisher;
 import com.training.food.ordering.payment.service.domain.entity.Payment;
 
 import java.time.ZoneId;
@@ -9,19 +8,13 @@ import java.util.Collections;
 
 public class PaymentCompletedEvent extends PaymentEvent{
 
-    private final DomainEventPublisher<PaymentCompletedEvent> publisher;
-    public PaymentCompletedEvent(Payment payment, ZonedDateTime createdAt, DomainEventPublisher<PaymentCompletedEvent> publisher) {
+    public PaymentCompletedEvent(Payment payment, ZonedDateTime createdAt) {
         super(payment, createdAt, Collections.emptyList());
-        this.publisher = publisher;
     }
 
-    public static PaymentCompletedEvent createdAtNow(Payment payment, DomainEventPublisher<PaymentCompletedEvent> publisher) {
+    public static PaymentCompletedEvent createdAtNow(Payment payment) {
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UCT"));
-        return new PaymentCompletedEvent(payment, now, publisher);
+        return new PaymentCompletedEvent(payment, now);
     }
 
-    @Override
-    public void fire() {
-        publisher.publish(this);
-    }
 }

@@ -10,25 +10,18 @@ import java.util.List;
 
 public class PaymentCancelledEvent extends PaymentEvent {
 
-    private final DomainEventPublisher<PaymentCancelledEvent> publisher;
-
-    public PaymentCancelledEvent(Payment payment, ZonedDateTime createdAt, List<String> failureMessages, DomainEventPublisher<PaymentCancelledEvent> publisher) {
+    public PaymentCancelledEvent(Payment payment, ZonedDateTime createdAt, List<String> failureMessages) {
         super(payment, createdAt, failureMessages);
-        this.publisher = publisher;
     }
 
-    public static PaymentCancelledEvent createdAtNow(Payment payment, DomainEventPublisher<PaymentCancelledEvent> publisher) {
+    public static PaymentCancelledEvent createdAtNow(Payment payment) {
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UCT"));
-        return new PaymentCancelledEvent(payment, now, Collections.emptyList(), publisher);
+        return new PaymentCancelledEvent(payment, now, Collections.emptyList());
     }
 
-    public static PaymentCancelledEvent createdAtNow(Payment payment, List<String> failureMessages, DomainEventPublisher<PaymentCancelledEvent> publisher) {
+    public static PaymentCancelledEvent createdAtNow(Payment payment, List<String> failureMessages) {
         ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UCT"));
-        return new PaymentCancelledEvent(payment, now, failureMessages, publisher);
+        return new PaymentCancelledEvent(payment, now, failureMessages);
     }
 
-    @Override
-    public void fire() {
-        publisher.publish(this);
-    }
 }

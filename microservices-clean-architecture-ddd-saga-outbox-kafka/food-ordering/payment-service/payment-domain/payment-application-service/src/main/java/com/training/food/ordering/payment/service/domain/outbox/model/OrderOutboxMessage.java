@@ -18,7 +18,7 @@ public class OrderOutboxMessage {
     private UUID id;
     private UUID sagaId;
     private ZonedDateTime createdAt;
-    private ZonedDateTime processAt;
+    private ZonedDateTime processedAt;
     private String type;
     private String payload;
     private PaymentStatus paymentStatus;
