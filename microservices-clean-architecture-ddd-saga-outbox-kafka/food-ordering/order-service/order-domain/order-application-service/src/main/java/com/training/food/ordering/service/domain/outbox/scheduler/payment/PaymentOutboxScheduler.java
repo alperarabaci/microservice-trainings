@@ -3,7 +3,7 @@ package com.training.food.ordering.service.domain.outbox.scheduler.payment;
 import com.training.food.order.outbox.OutboxScheduler;
 import com.training.food.order.outbox.OutboxStatus;
 import com.training.food.ordering.saga.SagaStatus;
-import com.training.food.ordering.service.domain.message.publisher.payment.PaymentRequestMessagePublisher;
+import com.training.food.ordering.service.domain.ports.output.message.publisher.payment.PaymentRequestMessagePublisher;
 import com.training.food.ordering.service.domain.outbox.model.payment.OrderPaymentOutboxMessage;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
