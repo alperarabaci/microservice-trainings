@@ -2,7 +2,7 @@ package com.training.food.ordering.service.domain;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.training.food.order.outbox.OutboxStatus;
+import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.domain.valueobject.*;
 import com.training.food.ordering.order.service.domain.entity.Customer;
 import com.training.food.ordering.order.service.domain.entity.Order;

@@ -1,6 +1,6 @@
 package com.training.food.ordering.service.messaging.publisher.kafka;
 
-import com.training.food.order.outbox.OutboxStatus;
+import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.kafka.order.avro.model.RestaurantApprovalRequestAvroModel;
 import com.training.food.ordering.kafka.producer.KafkaMessageHelper;
 import com.training.food.ordering.kafka.producer.service.KafkaProducer;

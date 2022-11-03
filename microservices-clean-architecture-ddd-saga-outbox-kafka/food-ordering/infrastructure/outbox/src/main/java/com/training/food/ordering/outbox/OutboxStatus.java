@@ -1,4 +1,4 @@
-package com.training.food.order.outbox;
+package com.training.food.ordering.outbox;
 
 public enum OutboxStatus {
     STARTED, COMPLETED, FAILED

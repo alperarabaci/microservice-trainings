@@ -1,6 +1,6 @@
 package com.training.food.ordering.restaurant.service.dataaccess.restaurant.outbox.adapter;
 
-import com.training.food.order.outbox.OutboxStatus;
+import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.restaurant.service.dataaccess.restaurant.outbox.exception.OrderOutboxNotFoundException;
 import com.training.food.ordering.restaurant.service.dataaccess.restaurant.outbox.mapper.OrderOutboxDataAccessMapper;
 import com.training.food.ordering.restaurant.service.dataaccess.restaurant.outbox.repository.OrderOutboxJpaRepository;

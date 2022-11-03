@@ -1,7 +1,7 @@
 package com.training.food.ordering.service.dataaccess.outbox.restaurantapproval.repository;
 
 
-import com.training.food.order.outbox.OutboxStatus;
+import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.saga.SagaStatus;
 import com.training.food.ordering.service.dataaccess.outbox.restaurantapproval.entity.ApprovalOutboxEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

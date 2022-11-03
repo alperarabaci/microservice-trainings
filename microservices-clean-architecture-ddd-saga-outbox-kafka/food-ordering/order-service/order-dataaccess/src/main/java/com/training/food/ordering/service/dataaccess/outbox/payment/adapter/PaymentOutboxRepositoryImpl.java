@@ -1,6 +1,6 @@
 package com.training.food.ordering.service.dataaccess.outbox.payment.adapter;
 
-import com.training.food.order.outbox.OutboxStatus;
+import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.saga.SagaStatus;
 import com.training.food.ordering.service.dataaccess.outbox.payment.exception.PaymentOutboxNotFoundException;
 import com.training.food.ordering.service.dataaccess.outbox.payment.mapper.PaymentOutboxDataAccessMapper;

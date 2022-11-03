@@ -1,6 +1,6 @@
 package com.training.food.ordering.service.domain;
 
-import com.training.food.order.outbox.OutboxStatus;
+import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.order.service.domain.event.OrderCreatedEvent;
 import com.training.food.ordering.saga.SagaStatus;
 import com.training.food.ordering.service.domain.dto.create.CreateOrderCommand;

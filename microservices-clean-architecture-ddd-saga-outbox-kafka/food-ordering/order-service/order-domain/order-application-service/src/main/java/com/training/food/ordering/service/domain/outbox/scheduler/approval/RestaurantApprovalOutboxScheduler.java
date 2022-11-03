@@ -1,7 +1,7 @@
 package com.training.food.ordering.service.domain.outbox.scheduler.approval;
 
-import com.training.food.order.outbox.OutboxScheduler;
-import com.training.food.order.outbox.OutboxStatus;
+import com.training.food.ordering.outbox.OutboxScheduler;
+import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.saga.SagaStatus;
 import com.training.food.ordering.service.domain.outbox.model.approval.OrderApprovalOutboxMessage;
 import com.training.food.ordering.service.domain.ports.output.message.publisher.restaurantapproval.RestaurantApprovalRequestMessagePublisher;

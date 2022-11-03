@@ -1,6 +1,6 @@
 package com.training.food.ordering.service.domain;
 
-import com.training.food.order.outbox.OutboxStatus;
+import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.domain.valueobject.OrderId;
 import com.training.food.ordering.domain.valueobject.OrderStatus;
 import com.training.food.ordering.domain.valueobject.PaymentStatus;
@@ -79,7 +79,7 @@ public class OrderPaymentSaga implements SagaStep<PaymentResponse> {
                 OutboxStatus.STARTED,
                 UUID.fromString(paymentResponse.getSagaId()));
         
-        log.error("Order with id: {} is paid", domainEvent.getOrder().getId().getValue());
+        log.info("Order with id: {} is paid", domainEvent.getOrder().getId().getValue());
     }
 
     private Order findOrder(String orderId) {

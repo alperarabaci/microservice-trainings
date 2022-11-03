@@ -16,9 +16,7 @@ import java.util.List;
 public class RestaurantDomainServiceImpl implements RestaurantDomainService {
     @Override
     public OrderApprovalEvent validateOrder(Restaurant restaurant,
-                                            List<String> failureMessages,
-                                            DomainEventPublisher<OrderApprovedEvent> approvePublisher,
-                                            DomainEventPublisher<OrderRejectedEvent> rejectPublisher) {
+                                            List<String> failureMessages) {
 
         restaurant.validateOrder(failureMessages);
         log.info("Validating order with id: {}", restaurant.getOrderDetail().getId().getValue());
@@ -29,16 +27,14 @@ public class RestaurantDomainServiceImpl implements RestaurantDomainService {
             return new OrderApprovedEvent(restaurant.getOrderApproval(),
                     restaurant.getId(),
                     failureMessages,
-                    ZonedDateTime.now(ZoneId.of("UTC")),
-                    approvePublisher);
+                    ZonedDateTime.now(ZoneId.of("UTC")));
         } else {
             log.info("Order is rejected for order id: {}", restaurant.getOrderDetail().getId().getValue());
             restaurant.constructOrderApproval(OrderApprovalStatus.REJECTED);
             return new OrderRejectedEvent(restaurant.getOrderApproval(),
                     restaurant.getId(),
                     failureMessages,
-                    ZonedDateTime.now(ZoneId.of("UTC")),
-                    rejectPublisher);
+                    ZonedDateTime.now(ZoneId.of("UTC")));
         }
 
     }

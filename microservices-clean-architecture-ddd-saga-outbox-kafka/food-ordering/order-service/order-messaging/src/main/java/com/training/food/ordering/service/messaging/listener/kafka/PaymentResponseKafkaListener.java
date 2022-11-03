@@ -59,6 +59,8 @@ public class PaymentResponseKafkaListener implements KafkaConsumer<PaymentRespon
                         avroModel.getOrderId());
             } catch (OrderNotFoundException e){
                 log.error("No order found for order id: {}", avroModel.getOrderId());
+            } catch (Throwable e) {
+                log.error("exception", e);
             }
         });
     }

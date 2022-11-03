@@ -1,6 +1,6 @@
 package com.training.food.ordering.service.domain.ports.output.message.publisher.payment;
 
-import com.training.food.order.outbox.OutboxStatus;
+import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.service.domain.outbox.model.payment.OrderPaymentOutboxMessage;
 
 import java.util.function.BiConsumer;

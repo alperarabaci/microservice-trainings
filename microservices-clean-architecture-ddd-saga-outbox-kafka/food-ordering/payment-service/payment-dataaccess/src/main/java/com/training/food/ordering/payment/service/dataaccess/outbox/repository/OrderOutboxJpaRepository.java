@@ -1,6 +1,6 @@
 package com.training.food.ordering.payment.service.dataaccess.outbox.repository;
 
-import com.training.food.order.outbox.OutboxStatus;
+import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.domain.valueobject.PaymentStatus;
 import com.training.food.ordering.payment.service.dataaccess.outbox.entity.OrderOutboxEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

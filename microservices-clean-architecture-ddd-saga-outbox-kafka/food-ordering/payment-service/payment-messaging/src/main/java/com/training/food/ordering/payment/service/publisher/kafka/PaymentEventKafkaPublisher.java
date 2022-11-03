@@ -1,6 +1,6 @@
 package com.training.food.ordering.payment.service.publisher.kafka;
 
-import com.training.food.order.outbox.OutboxStatus;
+import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.kafka.order.avro.model.PaymentResponseAvroModel;
 import com.training.food.ordering.kafka.producer.KafkaMessageHelper;
 import com.training.food.ordering.kafka.producer.service.KafkaProducer;

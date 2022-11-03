@@ -1,0 +1,10 @@
+kafkacat - kcat
+https://github.com/edenhill/kcat
+
+On Mac OS X with homebrew installed:
+brew reinstall kcat
+
+Decode avro message with -s, -r
+kcat -C -b localhost:19092 -t restaurant-approval-request -s value=avro -r http://localhost:8081
+
+

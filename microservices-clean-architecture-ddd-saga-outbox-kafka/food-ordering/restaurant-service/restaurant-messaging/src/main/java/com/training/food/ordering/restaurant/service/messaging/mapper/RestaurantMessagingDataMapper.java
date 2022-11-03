@@ -10,6 +10,7 @@ import com.training.food.ordering.restaurant.service.domain.dto.RestaurantApprov
 import com.training.food.ordering.restaurant.service.domain.entity.Product;
 import com.training.food.ordering.restaurant.service.domain.event.OrderApprovedEvent;
 import com.training.food.ordering.restaurant.service.domain.event.OrderRejectedEvent;
+import com.training.food.ordering.restaurant.service.domain.outbox.model.OrderEventPayload;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -65,6 +66,19 @@ public class RestaurantMessagingDataMapper {
                 .setOrderApprovalStatus(OrderApprovalStatus.valueOf(event.getOrderApproval()
                         .getApprovalStatus().name()))
                 .setFailureMessages(event.getFailureMessages())
+                .build();
+    }
+
+    public RestaurantApprovalResponseAvroModel
+    orderEventPayloadToRestaurantApprovalResponseAvroModel(String sagaId, OrderEventPayload orderEventPayload) {
+        return RestaurantApprovalResponseAvroModel.newBuilder()
+                .setId(UUID.randomUUID().toString())
+                .setSagaId(sagaId)
+                .setOrderId(orderEventPayload.getOrderId())
+                .setRestaurantId(orderEventPayload.getRestaurantId())
+                .setCreatedAt(orderEventPayload.getCreatedAt().toInstant())
+                .setOrderApprovalStatus(OrderApprovalStatus.valueOf(orderEventPayload.getOrderApprovalStatus()))
+                .setFailureMessages(orderEventPayload.getFailureMessages())
                 .build();
     }
 }
