@@ -1,8 +1,8 @@
 package com.training.food.ordering.payment.service.domain;
 
-import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.domain.valueobject.CustomerId;
 import com.training.food.ordering.domain.valueobject.PaymentStatus;
+import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.payment.service.domain.dto.PaymentRequest;
 import com.training.food.ordering.payment.service.domain.entity.CreditEntry;
 import com.training.food.ordering.payment.service.domain.entity.CreditHistory;

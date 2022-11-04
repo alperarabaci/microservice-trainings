@@ -1,7 +1,7 @@
 package com.training.food.ordering.service.dataaccess.outbox.restaurantapproval.entity;
 
-import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.domain.valueobject.OrderStatus;
+import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.saga.SagaStatus;
 import lombok.*;
 

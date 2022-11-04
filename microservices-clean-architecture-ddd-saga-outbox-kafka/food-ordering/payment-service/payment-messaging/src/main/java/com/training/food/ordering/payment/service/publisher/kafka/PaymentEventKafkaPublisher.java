@@ -1,9 +1,9 @@
 package com.training.food.ordering.payment.service.publisher.kafka;
 
-import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.kafka.order.avro.model.PaymentResponseAvroModel;
 import com.training.food.ordering.kafka.producer.KafkaMessageHelper;
 import com.training.food.ordering.kafka.producer.service.KafkaProducer;
+import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.payment.service.domain.config.PaymentServiceConfigData;
 import com.training.food.ordering.payment.service.domain.outbox.model.OrderEventPayload;
 import com.training.food.ordering.payment.service.domain.outbox.model.OrderOutboxMessage;

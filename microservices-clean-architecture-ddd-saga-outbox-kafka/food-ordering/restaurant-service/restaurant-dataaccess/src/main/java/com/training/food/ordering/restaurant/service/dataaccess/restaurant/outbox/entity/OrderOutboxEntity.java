@@ -1,7 +1,7 @@
 package com.training.food.ordering.restaurant.service.dataaccess.restaurant.outbox.entity;
 
-import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.domain.valueobject.OrderApprovalStatus;
+import com.training.food.ordering.outbox.OutboxStatus;
 import lombok.*;
 
 import javax.persistence.*;

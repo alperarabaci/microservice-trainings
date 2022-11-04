@@ -2,8 +2,8 @@ package com.training.food.ordering.kafka.producer;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.order.service.domain.exception.OrderDomainException;
+import com.training.food.ordering.outbox.OutboxStatus;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.RecordMetadata;

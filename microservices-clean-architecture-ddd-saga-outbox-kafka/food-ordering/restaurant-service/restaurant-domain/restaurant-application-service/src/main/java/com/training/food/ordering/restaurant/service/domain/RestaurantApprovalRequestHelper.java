@@ -1,7 +1,7 @@
 package com.training.food.ordering.restaurant.service.domain;
 
-import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.domain.valueobject.OrderId;
+import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.restaurant.service.domain.dto.RestaurantApprovalRequest;
 import com.training.food.ordering.restaurant.service.domain.entity.Restaurant;
 import com.training.food.ordering.restaurant.service.domain.event.OrderApprovalEvent;

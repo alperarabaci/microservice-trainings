@@ -1,6 +1,5 @@
 package com.training.food.ordering.service.domain;
 
-import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.domain.valueobject.OrderId;
 import com.training.food.ordering.domain.valueobject.OrderStatus;
 import com.training.food.ordering.domain.valueobject.PaymentStatus;
@@ -9,6 +8,7 @@ import com.training.food.ordering.order.service.domain.entity.Order;
 import com.training.food.ordering.order.service.domain.event.OrderPaidEvent;
 import com.training.food.ordering.order.service.domain.exception.OrderDomainException;
 import com.training.food.ordering.order.service.domain.exception.OrderNotFoundException;
+import com.training.food.ordering.outbox.OutboxStatus;
 import com.training.food.ordering.saga.SagaStatus;
 import com.training.food.ordering.saga.SagaStep;
 import com.training.food.ordering.service.domain.dto.message.PaymentResponse;
