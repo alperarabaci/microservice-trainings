@@ -1,4 +1,4 @@
-package com.training.food.ordering.application.service.exception.handler;
+package com.training.food.order.service.application.exception.handler;
 
 import com.training.food.order.service.application.exception.handler.ErrorDto;
 import lombok.extern.slf4j.Slf4j;
