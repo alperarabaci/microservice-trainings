@@ -10,9 +10,6 @@
         <module>customer-service</module>
         <module>payment-service</module>
         <module>restaurant-service</module>
-        <module>restaurant-service/restaurant-domain</module>
-        <module>restaurant-service/restaurant-messaging</module>
-        <module>restaurant-service/restaurant-domain/restaurant-application-service</module>
     </modules>
 
     <parent>
@@ -97,6 +94,37 @@
             <dependency>
                 <groupId>com.training.food.order</groupId>
                 <artifactId>common-dataaccess</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <!-- customer -->
+            <dependency>
+                <groupId>com.training.food.order</groupId>
+                <artifactId>customer-domain-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.training.food.order</groupId>
+                <artifactId>customer-application-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.training.food.order</groupId>
+                <artifactId>customer-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.training.food.order</groupId>
+                <artifactId>customer-dataaccess</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.training.food.order</groupId>
+                <artifactId>customer-messaging</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
