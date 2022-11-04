@@ -24,9 +24,11 @@ public class CustomerRepositoryImpl implements CustomerRepository {
                 .map(customerDataAccessMapper::customerEntityToCustomer);
     }
 
+
     @Override
     public Customer save(Customer customer) {
-        CustomerEntity entity = customerJpaRepository.save(customerDataAccessMapper.customerToCustomerEntity(customer));
+        CustomerEntity entity = customerJpaRepository
+                .save(customerDataAccessMapper.customerToCustomerEntity(customer));
         return customerDataAccessMapper.customerEntityToCustomer(entity);
     }
 }

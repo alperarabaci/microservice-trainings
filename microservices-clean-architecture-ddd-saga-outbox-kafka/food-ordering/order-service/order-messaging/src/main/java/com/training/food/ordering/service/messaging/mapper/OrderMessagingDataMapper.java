@@ -7,6 +7,7 @@ import com.training.food.ordering.order.service.domain.entity.Order;
 import com.training.food.ordering.order.service.domain.event.OrderCancelledEvent;
 import com.training.food.ordering.order.service.domain.event.OrderCreatedEvent;
 import com.training.food.ordering.order.service.domain.event.OrderPaidEvent;
+import com.training.food.ordering.service.domain.dto.message.CustomerModel;
 import com.training.food.ordering.service.domain.dto.message.PaymentResponse;
 import com.training.food.ordering.service.domain.dto.message.RestaurantApprovalResponse;
 import com.training.food.ordering.service.domain.outbox.model.approval.OrderApprovalEventPayload;
@@ -126,6 +127,15 @@ public class OrderMessagingDataMapper {
                                 .build()).collect(Collectors.toList()))
                 .setPrice(orderApprovalEventPayload.getPrice())
                 .setCreatedAt(orderApprovalEventPayload.getCreatedAt().toInstant())
+                .build();
+    }
+
+    public CustomerModel customerAvroModeltoCustomerModel(CustomerAvroModel customerAvroModel) {
+        return CustomerModel.builder()
+                .id(customerAvroModel.getId())
+                .username(customerAvroModel.getUsername())
+                .firstName(customerAvroModel.getFirstName())
+                .lastName(customerAvroModel.getLastName())
                 .build();
     }
 }

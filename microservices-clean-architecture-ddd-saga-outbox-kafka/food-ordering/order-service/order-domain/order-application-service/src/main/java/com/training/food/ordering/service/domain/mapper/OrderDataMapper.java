@@ -1,10 +1,7 @@
 package com.training.food.ordering.service.domain.mapper;
 
 import com.training.food.ordering.domain.valueobject.*;
-import com.training.food.ordering.order.service.domain.entity.Order;
-import com.training.food.ordering.order.service.domain.entity.OrderItem;
-import com.training.food.ordering.order.service.domain.entity.Product;
-import com.training.food.ordering.order.service.domain.entity.Restaurant;
+import com.training.food.ordering.order.service.domain.entity.*;
 import com.training.food.ordering.order.service.domain.event.OrderCancelledEvent;
 import com.training.food.ordering.order.service.domain.event.OrderCreatedEvent;
 import com.training.food.ordering.order.service.domain.event.OrderPaidEvent;
@@ -13,6 +10,7 @@ import com.training.food.ordering.service.domain.dto.create.CreateOrderCommand;
 import com.training.food.ordering.service.domain.dto.create.CreateOrderResponse;
 import com.training.food.ordering.service.domain.dto.create.OrderAddressDto;
 import com.training.food.ordering.service.domain.dto.create.OrderItemDto;
+import com.training.food.ordering.service.domain.dto.message.CustomerModel;
 import com.training.food.ordering.service.domain.dto.track.TrackOrderResponse;
 import com.training.food.ordering.service.domain.outbox.model.approval.OrderApprovalEventPayload;
 import com.training.food.ordering.service.domain.outbox.model.approval.OrderApprovalEventProduct;
@@ -120,6 +118,13 @@ public class OrderDataMapper {
                 .createdAt(orderCancelledEvent.getCreatedAt())
                 .paymentOrderStatus(PaymentOrderStatus.CANCELLED.name())
                 .build();
+    }
+
+    public Customer customerModelToCustomer(CustomerModel customerModel) {
+        return new Customer(new CustomerId(UUID.fromString(customerModel.getId())),
+                customerModel.getUsername(),
+                customerModel.getFirstName(),
+                customerModel.getLastName());
     }
 
 }
