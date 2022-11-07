@@ -11,7 +11,7 @@ public class CustomerMapper {
 
     public Customer createCustomerCommandToCustomer(CreateCustomerCommand command) {
         return new Customer(new CustomerId(command.getCustomerId()),
-                command.getFirstName(),
+                command.getUsername(),
                 command.getFirstName(),
                 command.getLastName()
                 );

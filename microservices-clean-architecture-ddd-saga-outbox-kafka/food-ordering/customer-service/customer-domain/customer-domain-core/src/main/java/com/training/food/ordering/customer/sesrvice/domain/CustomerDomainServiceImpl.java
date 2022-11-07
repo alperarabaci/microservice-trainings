@@ -8,7 +8,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 @Slf4j
-public class CustomerDomainServıceImpl implements CustomerDomainService {
+public class CustomerDomainServiceImpl implements CustomerDomainService {
 
     @Override
     public CustomerCreatedEvent validateAndInitiateCustomer(Customer customer) {
