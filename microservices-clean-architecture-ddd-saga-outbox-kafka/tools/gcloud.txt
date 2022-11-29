@@ -1,0 +1,46 @@
+Enable kubernetes
+
+gcloud config set compute/zone europe-west6-a
+
+gcloud container clusters create food-ordering-system-cluster
+
+gcloud container clusters get-credentials food-ordering-system-cluster --zone europe-west6-a --project food-ordering-system-370111
+
+Enable Artifact Registry API
+
+Create repository: food-ordering-system-repository
+
+(If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.)
+
+//gcloud cli
+//https://cloud.google.com/sdk/docs/install-sdk
+./google-cloud-sdk/install.sh
+
+./google-cloud-sdk/bin/gcloud init
+
+//follow instruction then:
+//Your Google Cloud SDK is configured and ready to use!
+
+//pushing-and-pulling
+//https://cloud.google.com/container-registry/docs/pushing-and-pulling
+
+cd /Users/jammer/Documents/dev/gcloud
+./google-cloud-sdk/bin/gcloud auth login
+
+gcloud auth configure-docker europe-west6-docker.pkg.dev
+
+docker tag com.training.food.order/customer.service:1.0-SNAPSHOT europe-west6-docker.pkg.dev/food-ordering-system-370111/food-ordering-system-repository/customer.service:1.0-SNAPSHOT
+
+docker tag com.training.food.order/payment.service:1.0-SNAPSHOT europe-west6-docker.pkg.dev/food-ordering-system-370111/food-ordering-system-repository/payment.service:1.0-SNAPSHOT
+
+docker tag com.training.food.order/restaurant.service:1.0-SNAPSHOT europe-west6-docker.pkg.dev/food-ordering-system-370111/food-ordering-system-repository/restaurant.service:1.0-SNAPSHOT
+
+docker tag com.training.food.order/order.service:1.0-SNAPSHOT europe-west6-docker.pkg.dev/food-ordering-system-370111/food-ordering-system-repository/order.service:1.0-SNAPSHOT
+
+
+//make sure you are logged in.
+
+docker push europe-west6-docker.pkg.dev/food-ordering-system-370111/food-ordering-system-repository/order.service:1.0-SNAPSHOT
+docker push europe-west6-docker.pkg.dev/food-ordering-system-370111/food-ordering-system-repository/payment.service:1.0-SNAPSHOT
+docker push europe-west6-docker.pkg.dev/food-ordering-system-370111/food-ordering-system-repository/restaurant.service:1.0-SNAPSHOT
+docker push europe-west6-docker.pkg.dev/food-ordering-system-370111/food-ordering-system-repository/customer.service:1.0-SNAPSHOT
