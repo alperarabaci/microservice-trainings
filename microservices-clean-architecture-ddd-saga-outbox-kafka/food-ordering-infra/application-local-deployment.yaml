@@ -1,7 +1,7 @@
 --- 
 #order
 apiVersion: apps/v1
-kind: Deployement
+kind: Deployment
 metadata:
   name: order-deployment
   namespace: default
@@ -54,7 +54,7 @@ spec:
 ---
 #payment
 apiVersion: apps/v1
-kind: Deployement
+kind: Deployment
 metadata:
   name: payment-deployment
   namespace: default
@@ -107,7 +107,7 @@ spec:
 ---
 #restaurant
 apiVersion: apps/v1
-kind: Deployement
+kind: Deployment
 metadata:
   name: restaurant-deployment
   namespace: default
@@ -161,7 +161,7 @@ spec:
 ---
 # customer
 apiVersion: apps/v1
-kind: Deployement
+kind: Deployment
 metadata:
   name: customer-deployment
   namespace: default
