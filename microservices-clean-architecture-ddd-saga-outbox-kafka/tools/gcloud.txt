@@ -174,3 +174,40 @@ curl --location --request POST 'http://34.65.250.XXX:8181/orders' \
 
 
 curl --location --request GET 'http://34.65.250.XXX:8181/orders/8833e5b7-f00b-46c4-bac7-5a125d1e2acd'
+
+
+//after adding autoscale to application-deployment yaml
+
+(food-ordering-system-370111)$ kubectl get pods
+
+NAME                                                      READY   STATUS    RESTARTS       AGE
+order-deployment-798cfc55d8-kvkgn                         1/1     Running   0              25m
+order-deployment-798cfc55d8-s2dkh                         1/1     Running   0              14m
+payment-deployment-7b5848dd8d-2fs9l                       1/1     Running   0              14m
+payment-deployment-7b5848dd8d-m547v                       1/1     Running   0              14m
+postgres-deployment-cb56fc764-8ngq2                       1/1     Running   0              5h4m
+restaurant-deployment-76d5f7f4c4-7sxmp                    1/1     Running   0              14m
+restaurant-deployment-76d5f7f4c4-lwxpm                    1/1     Running   0              14m
+
+(food-ordering-system-370111)$ kubectl get service
+NAME                                        TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)             AGE
+order-service                               LoadBalancer   10.48.15.45    34.65.205.135   8181:31965/TCP      26m
+payment-service                             LoadBalancer   10.48.6.55     34.65.102.152   8182:31571/TCP      16m
+postgres-service                            LoadBalancer   10.48.5.3      34.65.82.206    5432:31984/TCP      5h6m
+restaurant-service                          LoadBalancer   10.48.3.189    34.65.250.146   8183:31903/TCP      16m
+
+//Kubernetes service can manage load balancing between pods.
+
+//there should be a ingress control integration. 
+https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/
+https://github.com/kubernetes/ingress-gce/blob/master/README.md#readme
+
+
+//delete objects on gke 
+
+kubectl delete -f application-deployment.yml
+kubectl delete -f kafka-client.yml
+kubectl delete -f postgres-deployment.yml
+helm uninstall gke-confluent-kafka
+
+gcloud container clusters delete food-ordering-system-cluster --zone europe-west6-a
