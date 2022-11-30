@@ -72,9 +72,7 @@ spec:
   - type: Resource
     resource:
       name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 85
+      targetAverageUtilization: 85
 ---
 #payment
 apiVersion: apps/v1
@@ -148,9 +146,7 @@ spec:
   - type: Resource
     resource:
       name: cpu
-      target:
-        type: Utilization
-        averageUtilization: 85
+      targetAverageUtilization: 85
 ---
 #restaurant
 apiVersion: apps/v1
@@ -204,9 +200,27 @@ spec:
       protocol: TCP
       port: 8183    
   type: LoadBalancer
-  loadBalancerIP: ""    
-
-
+  loadBalancerIP: ""
+---
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: restaurant-deployment-hpa
+  namespace: default
+  labels: 
+    app: restaurant-deployment
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: restaurant-deployment
+  minReplicas: 2
+  maxReplicas: 4
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      targetAverageUtilization: 85
 ---
 # customer
 apiVersion: apps/v1
@@ -260,4 +274,24 @@ spec:
       protocol: TCP
       port: 8184    
   type: LoadBalancer
-  loadBalancerIP: ""    
+  loadBalancerIP: ""
+---
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: customer-deployment-hpa
+  namespace: default
+  labels: 
+    app: customer-deployment
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: customer-deployment
+  minReplicas: 2
+  maxReplicas: 4
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      targetAverageUtilization: 85  
