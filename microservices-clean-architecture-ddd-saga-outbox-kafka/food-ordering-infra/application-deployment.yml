@@ -27,6 +27,8 @@ spec:
               value: "gke-confluent-kafka-cp-kafka-headless:9092"
             - name: KAFKA-CONFIG_SCHEMA-REGISTRY-URL
               value: "http://gke-confluent-kafka-cp-schema-registry:8081"
+            - name: SPRING_DATASOURCE_INITIALIZATION-MODE
+              value: "never"
           resources:
             limits:
               cpu: "500m"
@@ -51,7 +53,28 @@ spec:
       port: 8181    
   type: LoadBalancer
   loadBalancerIP: ""
-
+---
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: order-deployment-hpa
+  namespace: default
+  labels: 
+    app: order-deployment
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: order-deployment
+  minReplicas: 2
+  maxReplicas: 4
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 85
 ---
 #payment
 apiVersion: apps/v1
@@ -80,13 +103,15 @@ spec:
               value: "gke-confluent-kafka-cp-kafka-headless:9092"
             - name: KAFKA-CONFIG_SCHEMA-REGISTRY-URL
               value: "http://gke-confluent-kafka-cp-schema-registry:8081"
+            - name: SPRING_DATASOURCE_INITIALIZATION-MODE
+              value: "never"              
           resources:
             limits:
               cpu: "500m"
               memory: "1024Mi"
             requests:
               cpu: "200m"
-              memory: "256Mi"
+              memory: "256Mi"              
 ---
 apiVersion: v1
 kind: Service
@@ -104,7 +129,28 @@ spec:
       port: 8182    
   type: LoadBalancer
   loadBalancerIP: ""
-
+---
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: payment-deployment-hpa
+  namespace: default
+  labels: 
+    app: payment-deployment
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: payment-deployment
+  minReplicas: 2
+  maxReplicas: 4
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 85
 ---
 #restaurant
 apiVersion: apps/v1
@@ -133,6 +179,8 @@ spec:
               value: "gke-confluent-kafka-cp-kafka-headless:9092"
             - name: KAFKA-CONFIG_SCHEMA-REGISTRY-URL
               value: "http://gke-confluent-kafka-cp-schema-registry:8081"
+            - name: SPRING_DATASOURCE_INITIALIZATION-MODE
+              value: "never"              
           resources:
             limits:
               cpu: "500m"
@@ -187,6 +235,8 @@ spec:
               value: "gke-confluent-kafka-cp-kafka-headless:9092"
             - name: KAFKA-CONFIG_SCHEMA-REGISTRY-URL
               value: "http://gke-confluent-kafka-cp-schema-registry:8081"
+            - name: SPRING_DATASOURCE_INITIALIZATION-MODE
+              value: "never"              
           resources:
             limits:
               cpu: "500m"

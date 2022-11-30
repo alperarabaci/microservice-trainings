@@ -27,7 +27,7 @@ spring:
     platform: postgres
     schema: classpath:init-schema.sql
     data: classpath:init-data.sql
-    initialization-mode: always
+    #initialization-mode: always
 
 
 kafka-config:
