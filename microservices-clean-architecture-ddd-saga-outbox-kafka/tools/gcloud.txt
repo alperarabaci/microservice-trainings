@@ -44,3 +44,57 @@ docker push europe-west6-docker.pkg.dev/food-ordering-system-370111/food-orderin
 docker push europe-west6-docker.pkg.dev/food-ordering-system-370111/food-ordering-system-repository/payment.service:1.0-SNAPSHOT
 docker push europe-west6-docker.pkg.dev/food-ordering-system-370111/food-ordering-system-repository/restaurant.service:1.0-SNAPSHOT
 docker push europe-west6-docker.pkg.dev/food-ordering-system-370111/food-ordering-system-repository/customer.service:1.0-SNAPSHOT
+
+
+//L103
+//gcloud console
+git clone https://github.com/confluentinc/cp-helm-charts.git
+
+//helm already installed
+@cloudshell:~ (food-ordering-system-370111)$ helm version
+version.BuildInfo{Version:"v3.9.3",
+
+helm install gke-confluent-kafka cp-helm-charts/ --version 0.6.0
+
+//result:
+
+## Kafka
+## ------------------------------------------------------
+To connect from a client pod:
+
+1. Deploy a kafka client pod with configuration:
+
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: kafka-client
+      namespace: default
+    spec:
+      containers:
+      - name: kafka-client
+        image: confluentinc/cp-enterprise-kafka:6.1.0
+        command:
+          - sh
+          - -c
+          - "exec tail -f /dev/null"
+
+2. Log into the Pod
+
+  kubectl exec -it kafka-client -- /bin/bash
+
+3. Explore with kafka commands:
+
+  # Create the topic
+  kafka-topics --zookeeper gke-confluent-kafka-cp-zookeeper-headless:2181 --topic gke-confluent-kafka-topic --create --partitions 1 --replication-factor 1 --if-not-exists
+
+  # Create a message
+  MESSAGE="`date -u`"
+
+  # Produce a test message to the topic
+  echo "$MESSAGE" | kafka-console-producer --broker-list gke-confluent-kafka-cp-kafka-headless:9092 --topic gke-confluent-kafka-topic
+
+  # Consume a test message from the topic
+  kafka-console-consumer --bootstrap-server gke-confluent-kafka-cp-kafka-headless:9092 --topic gke-confluent-kafka-topic --from-beginning --timeout-ms 2000 --max-messages 1 | grep "$MESSAGE"
+
+//gke-confluent-kafka-cp-zookeeper-headless:2181
+//gke-confluent-kafka-cp-kafka-headless:9092
