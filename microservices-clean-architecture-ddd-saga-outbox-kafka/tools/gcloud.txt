@@ -98,3 +98,79 @@ To connect from a client pod:
 
 //gke-confluent-kafka-cp-zookeeper-headless:2181
 //gke-confluent-kafka-cp-kafka-headless:9092
+
+//clone from github repo 
+
+git clone https://github.com/alperarabaci/microservice-trainings.git
+
+//infra files are under subdirectory:
+//microservice-trainings/microservices-clean-architecture-ddd-saga-outbox-kafka/food-ordering-infra
+
+kubectl apply -f kafka-client.yml
+
+kubectl cp create-topic.sh kafka-client:/kafka-client-storage
+
+kubectl exec -it kafka-client -- /bin/bash
+
+cd ../..
+cd kafka-client-storage/
+
+sh create-topic.sh gke-confluent-kafka-cp-zookeeper-headless
+
+//exit shell
+exit
+
+//create postgres pod
+kubectl apply -f posgres-deployment.yml
+
+$ kubectl get services
+NAME                                        TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)             AGE
+postgres-service                            LoadBalancer   10.48.X.X      34.65.82.XXX   5432:31984/TCP      2m36s
+order-service                               LoadBalancer   10.48.X.X      34.65.250.XXX   8181:32120/TCP      7m53s
+payment-service                             LoadBalancer   10.48.X.X      34.65.28.XXX     8182:32591/TCP      7m53s
+postgres-service                            LoadBalancer   10.48.X.X      34.65.82.XXX    5432:31984/TCP      76m
+restaurant-service                          LoadBalancer   10.48.X.X      34.65.102.XXX   8183:31219/TCP      7m52s
+customer-service                            LoadBalancer   10.48.3.120    34.65.205.XXX   8184:31480/TCP      7m52s
+
+//send request to customer & order service external ip.
+
+curl --location --request POST '34.65.205.XXX:8184/customers' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "customerId":"d215b5f8-0249-4dc5-89a3-51fd148cfb41",
+    "username": "user_1",
+    "firstName": "First",
+    "lastName": "User"
+}'
+
+
+curl --location --request POST 'http://34.65.250.XXX:8181/orders' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "customerId": "d215b5f8-0249-4dc5-89a3-51fd148cfb41",
+  "restaurantId": "d215b5f8-0249-4dc5-89a3-51fd148cfb45",
+  "address": {
+    "street": "street_1",
+    "postalCode": "1000AB",
+    "city": "Amsterdam"
+  },
+  "price": 200.00,
+  "items": [
+    {
+      "productId": "d215b5f8-0249-4dc5-89a3-51fd148cfb48",
+      "quantity": 1,
+      "price": 50.00,
+      "subTotal": 50.00
+    },
+    {
+      "productId": "d215b5f8-0249-4dc5-89a3-51fd148cfb48",
+      "quantity": 3,
+      "price": 50.00,
+      "subTotal": 150.00
+    }
+  ]
+}
+'
+
+
+curl --location --request GET 'http://34.65.250.XXX:8181/orders/8833e5b7-f00b-46c4-bac7-5a125d1e2acd'
